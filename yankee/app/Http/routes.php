@@ -17,4 +17,7 @@ Route::get('/', function () {
 Route::get('home', function () {
     return view('home');
 });
+Route::get('inputsiswa', function () {
+    return view('inputsiswa');
+});
 Route::post('login', 'Logincontroller@Aulogin');
