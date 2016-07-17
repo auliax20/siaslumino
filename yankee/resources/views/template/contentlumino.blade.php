@@ -9,35 +9,29 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Dashboard</h1>
+				<h1 class="page-header">@yield('title')</h1>
 			</div>
 		</div><!--/.row-->
 		
 		<div class="row">
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<p>Dulu Iko Menu Gadang</p>
+			<div class="col-xs-12 col-md-12 col-lg-12">
+				@yield('panel')
 			</div>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<p>Iko Traffic Overview</p>
+				@yield('middle')
 			</div>
 		</div><!--/.row-->
-		
-		<div class="row">
-			<div class="col-xs-6 col-md-3">
-				<p>Iko Piechar dalam nyo ado %</p>
-			</div>
-		</div><!--/.row-->
-								
+					
 		<div class="row">
 			<div class="col-md-8">
-				<p>Iko Chatting</p>	
+				@yield('bottom-left')
 			</div><!--/.col-->
 			
 			<div class="col-md-4">
-				<p>Iko to do list</p>								
+				@yield('bottom-right')								
 			</div><!--/.col-->
 		</div><!--/.row-->
 	</div>	<!--/.main-->
