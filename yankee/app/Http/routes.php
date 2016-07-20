@@ -17,7 +17,8 @@ Route::get('/', function () {
 Route::get('home', function () {
     return view('home');
 });
-Route::get('inputsiswa', function () {
+Route::get('siswa', function () {
     return view('inputsiswa');
 });
+Route::post('/siswa/inputsiswa', 'Muridcontroller@Tambahdata');
 Route::post('login', 'Logincontroller@Aulogin');
