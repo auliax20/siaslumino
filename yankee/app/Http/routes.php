@@ -22,5 +22,6 @@ Route::get('/siswa/add', function () {
 });
 Route::get('/siswa/view', 'Muridcontroller@Viewmurid');
 Route::get('/siswa', 'Muridcontroller@Viewmurid');
+Route::get('/siswa/delete/{username}', 'Muridcontroller@Deletemurid');
 Route::post('/siswa/inputsiswa', 'Muridcontroller@Tambahdata');
 Route::post('login', 'Logincontroller@Aulogin');

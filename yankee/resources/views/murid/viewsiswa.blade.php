@@ -29,15 +29,14 @@ View Siswa
                             <?php $no=1;?>
                             @foreach($siswa as $data)
                             <tr>
-						        <th>{{$no}}</th>
+						        <th>{{$no++}}</th>
 						        <th>{{$data->nis}}</th>
 						        <th>{{$data->nama_murid}}</th>
 						        <th>{{$data->alamat_murid}}</th>
                                 <th>{{$data->no_hp}}</th>
                                 <th>{{$data->username}}</th>
-                                <th>Operation</th>
+                                <th><a href="/siswa/edit/{{$data->username}}" class="btn btn-warning">Edit</a> <a href="/siswa/delete/{{$data->username}}" class="btn btn-danger">Delete</a></th>
 						    </tr>
-                            <?php $no = $no++;?>
                             @endforeach
                             </tbody>
 						</table>

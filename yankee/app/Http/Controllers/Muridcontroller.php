@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Murid;
+use App\Userr;
 use View;
 use Input;
 use DB;
@@ -24,9 +25,9 @@ class Muridcontroller extends Controller
 			'username' => 'required|max:255|unique:murid',
         ]);
     }
-	protected function validatorUser(array $data)
+	protected function validatorUser(array $datau)
     {
-        return Validator::make($data, [
+        return Validator::make($datau, [
             'email' => 'required|email|max:255|unique:user',
 			'namalengkap' => 'required',
 			'username' => 'required|max:255|unique:user',
@@ -41,6 +42,13 @@ class Muridcontroller extends Controller
 			'no_hp' => Input::get('no_hp'),
 			'username' => Input::get('username')
 		);
+		$vdatauser = array(
+			'namalengkap' => Input::get('nama_murid'),
+			'username' => Input::get('username'),
+			'password' => Input::get('password'),
+			'password_confirmation' => Input::get('password_confirmation'),
+			'email' => Input::get('email')
+		);
 		$datauser = array(
 			'namalengkap' => Input::get('nama_murid'),
 			'username' => Input::get('username'),
@@ -49,21 +57,29 @@ class Muridcontroller extends Controller
 			'level' => 'murid'
 		);
 		$vdata = $this->validatorData($data);
-		$vuser = $this->validatorUser($datauser);
-		if($vdata->passes()){
-			if($vuser->passes()){
-				DB::table('user')->insert($datauser);	
-				DB::table('murid')->insert($data);	
-			}else{
-				return redirect()->back()->with('error', $vuser->errors()->all());
-			}
+		$vuser = $this->validatorUser($vdatauser);
+		if($vdata->passes()&&$vuser->passes()){
+			DB::table('user')->insert($datauser);	
+			DB::table('murid')->insert($data);	
 		}else{
-			return redirect()->back()->with('error', $vdata->errors()->all());
+			$mes = $vdata->messages();
+			$mes = $mes.$vuser->messages();
+			return redirect()->back()->with('error', $mes);
 		}
 		return Redirect::to('/siswa/view')->with('message','Berhasil Disimpan');
 	}
 	public function Viewmurid(){
 		$murid = DB::table('murid')->get();
 		return View::make('murid.viewsiswa')->with('siswa', $murid);
+	}
+	public function Deletemurid($id){
+		$data = Murid::where('username',$id);
+		$datau = Userr::where('username',$id);
+		$data->delete();
+		$datau->delete();
+	}
+	public function Vieweditmurid($id){
+		$data = Murid::where('username',$id)->first();
+		return view('editsiswa')->with('siswa', $data);
 	}
 }

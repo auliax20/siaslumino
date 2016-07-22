@@ -5,6 +5,16 @@
 Input Siswa
 @stop
 @section('panel')
+@if (session('error'))
+    <div class="alert bg-danger">
+        {{ session('error') }}
+    </div>
+@endif
+@if (session('message'))
+    <div class="alert bg-primary">
+        {{ session('message') }}
+    </div>
+@endif
 <div class="panel panel-default">
 					<div class="panel-heading">Form Input Siswa</div>
 					<div class="panel-body">
@@ -39,7 +49,10 @@ Input Siswa
 									<label>Password</label>
 									<input type="password" class="form-control" placeholder="Password" name="password">
 								</div>
-								
+								<div class="form-group">
+									<label>Confirm Password</label>
+									<input type="password" class="form-control" placeholder="Password" name="password_confirmation">
+								</div>
 								<div class="form-group">
 									<button class="btn btn-primary">Submit</button>
 								</div>				
