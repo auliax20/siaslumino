@@ -20,8 +20,10 @@ Route::get('home', function () {
 Route::get('/siswa/add', function () {
     return view('murid.inputsiswa');
 });
+Route::get('/siswa/edit/{username}', 'Muridcontroller@Vieweditmurid');
 Route::get('/siswa/view', 'Muridcontroller@Viewmurid');
 Route::get('/siswa', 'Muridcontroller@Viewmurid');
 Route::get('/siswa/delete/{username}', 'Muridcontroller@Deletemurid');
 Route::post('/siswa/inputsiswa', 'Muridcontroller@Tambahdata');
 Route::post('login', 'Logincontroller@Aulogin');
+Route::post('/siswa/editsiswa/{username}', 'Muridcontroller@Editmurid');

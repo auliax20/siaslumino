@@ -10,6 +10,11 @@ View Siswa
         {{ session('error') }}
     </div>
 @endif
+@if (session('message'))
+    <div class="alert bg-success">
+        {{ session('message') }}
+    </div>
+@endif
 			<div class="panel panel-default">
 				<div class="panel-heading">View Siswa</div>
 					<div class="panel-body">
