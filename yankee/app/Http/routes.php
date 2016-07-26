@@ -25,5 +25,13 @@ Route::get('/siswa/view', 'Muridcontroller@Viewmurid');
 Route::get('/siswa', 'Muridcontroller@Viewmurid');
 Route::get('/siswa/delete/{username}', 'Muridcontroller@Deletemurid');
 Route::post('/siswa/inputsiswa', 'Muridcontroller@Tambahdata');
-Route::post('login', 'Logincontroller@Aulogin');
 Route::post('/siswa/editsiswa/{username}', 'Muridcontroller@Editmurid');
+
+Route::get('/guru/view', 'Gurucontroller@index');
+Route::get('/guru', 'Gurucontroller@index');
+Route::post('/guru/inputguru', 'Gurucontroller@add');
+Route::get('/guru/add', function () {
+    return view('guru.inputguru');
+});
+
+Route::post('login', 'Logincontroller@Aulogin');

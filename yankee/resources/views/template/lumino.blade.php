@@ -85,6 +85,7 @@
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
 	</script>	
+    @yield('jsadd')
 </body>
 
 </html>

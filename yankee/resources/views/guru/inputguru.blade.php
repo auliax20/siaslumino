@@ -23,7 +23,7 @@ Input Guru
                             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="form-group">
 									<label>NIP</label>
-									<input class="form-control" placeholder="NIS" name="nip">
+									<input class="form-control" placeholder="NIP" name="nip">
 								</div>
 								<div class="form-group">
 									<label>Nama Lengkap</label>
@@ -31,7 +31,7 @@ Input Guru
 								</div>
                                 <div class="form-group">
 									<label>Tanggal Lahir</label>
-									<input class="form-control" placeholder="YYYY/MM/DD" name="tanggal_lahir">
+									<input class="form-control" placeholder="YYYY/MM/DD" name="tanggal_lahir" id="date">
 								</div>	
                                 <div class="form-group">
 									<label>Jabatan</label>
@@ -65,5 +65,19 @@ Input Guru
 						</form>
 					</div>
 				</div>
-
+@stop
+@section('jsadd')
+<script>
+    				$(document).ready(function(){
+      				var date_input=$('input[name="tanggal_lahir"]'); //our date input has the name "date"
+      				var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      				var options={
+        				format: 'yyyy/mm/dd',
+        				container: container,
+        				todayHighlight: true,
+        				autoclose: true,
+      				};
+      				date_input.datepicker(options);
+    				})
+</script>
 @stop

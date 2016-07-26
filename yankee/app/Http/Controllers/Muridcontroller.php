@@ -84,7 +84,7 @@ class Muridcontroller extends Controller
 	}
 	public function Editmurid($id){
 		$update = Murid::where('username', $id)->first();
-		$update->nis = Input::get('nama_murid');
+		$update->nis = Input::get('nis');
 		$update->nama_murid = Input::get('nama_murid');
 		$update->alamat_murid = Input::get('alamat_murid');
 		$update->no_hp = Input::get('no_hp');
