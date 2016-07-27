@@ -82,7 +82,7 @@ class Gurucontroller extends Controller
 			
 	}
 	public function update($id){
-		$update = Guru::where('username',$id);
+		$update = Guru::where('username',$id)->first();
 		$update->nip = Input::get('nip');
 		$update->nama_guru = Input::get('nama_guru');
 		$update->tanggal_lahir = Input::get('tanggal_lahir');
