@@ -37,5 +37,14 @@ Route::get('/guru/delete/{username}', 'Gurucontroller@delete');
 Route::post('/guru/inputguru', 'Gurucontroller@add');
 Route::post('/guru/editguru/{username}', 'Gurucontroller@update');
 
+Route::get('/kelas/view', 'Kelascontroller@index');
+Route::get('/kelas', 'Kelascontroller@index');
+Route::get('/kelas/add', function () {
+    return view('kelas.inputkelas');
+});
+Route::get('/kelas/edit/{kode_kelas}', 'Kelascontroller@Viewedit');
+Route::get('/kelas/delete/{kode_kelas}', 'Kelascontroller@delete');
+Route::post('/kelas/inputkelas', 'Kelascontroller@add');
+Route::post('/kelas/editkelas/{kode_kelas}', 'Kelascontroller@edit');
 
 Route::post('login', 'Logincontroller@Aulogin');

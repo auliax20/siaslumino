@@ -2,7 +2,7 @@
 @extends('template.menulumino')
 @extends('template.contentlumino')
 @section('title')
-Edit Siswa
+Edit Guru
 @stop
 @section('panel')
 @if (session('error'))
@@ -16,7 +16,7 @@ Edit Siswa
     </div>
 @endif
 <div class="panel panel-default">
-					<div class="panel-heading">Form Edit Siswa</div>
+					<div class="panel-heading">Form Edit Guru</div>
 					<div class="panel-body">
 						<div class="col-lg-12">
 							<form role="form" method="POST" action="{{ asset('guru/editguru/'.$guru->username) }}">
