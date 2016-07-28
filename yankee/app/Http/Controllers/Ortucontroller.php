@@ -18,7 +18,7 @@ class Ortucontroller extends Controller
 {
     public function index(){
 		$ortu = Ortu::with('console')->get();	
-		return view('ortu/viewortu')->with('ortu',$ortu);
+		return view('ortu.viewortu')->with('ortu',$ortu);
 	}
 	public function formadd(){
 		$siswa = Murid::orderBy('nama_murid', 'ASC')->get();	

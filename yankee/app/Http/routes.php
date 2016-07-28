@@ -73,4 +73,12 @@ Route::get('/mapel/delete/{kode}', 'Mapelcontroller@delete');
 Route::post('/mapel/inputmapel', 'Mapelcontroller@add');
 Route::post('/mapel/editmapel/{kode}', 'Mapelcontroller@update');
 
+Route::get('/walas/view', 'Walascontroller@index');
+Route::get('/walas', 'Walascontroller@index');
+Route::get('/walas/add', 'Walascontroller@formadd');
+Route::get('/walas/edit/{kode}', 'Walascontroller@viewedit');
+Route::get('/walas/delete/{kode}', 'Walascontroller@delete');
+Route::post('/walas/inputwalas', 'Walascontroller@add');
+Route::post('/walas/editwalas/{kode}', 'Walascontroller@edit');
+
 Route::post('login', 'Logincontroller@Aulogin');
