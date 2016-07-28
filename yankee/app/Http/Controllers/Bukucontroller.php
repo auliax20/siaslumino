@@ -39,8 +39,8 @@ class Bukucontroller extends Controller
 		$buku->penerbit = Input::get('penerbit');	
 		$buku->jumlah = Input::get('jumlah');
 		$data = array(
-			'kode_buku' => Input::get('kode_kelas'),
-			'nama_buku' => Input::get('nama_kelas'),
+			'kode_buku' => Input::get('kode_buku'),
+			'nama_buku' => Input::get('nama_buku'),
 			'pengarang' => Input::get('pengarang'),
 			'penerbit' => Input::get('penerbit'),
 			'jumlah' => Input::get('jumlah'),
@@ -48,13 +48,25 @@ class Bukucontroller extends Controller
 		$vdata = $this->validatorData($data);
 		if($vdata->passes()){
 			$buku->save();	
-			return redirect()->to()->with('message', 'Buku Berhasil Disimpan');
+			return redirect()->to('buku/view')->with('message', 'Buku Berhasil Disimpan');
 		}else{
 			$mes = $vdata->messages();
 			return redirect()->back()->with('error', $mes);	
 		}
 	}
 	public function edit($id){
-		$buku = Buku::where('id_buku',$id)->first();	
+		$buku = Buku::where('id_buku',$id)->first();
+		$buku->kode_buku = Input::get('kode_buku');
+		$buku->nama_buku = Input::get('nama_buku');
+		$buku->pengarang = Input::get('pengarang');
+		$buku->penerbit = Input::get('penerbit');
+		$buku->jumlah = Input::get('jumlah');
+		$buku->update();
+		return redirect()->to('buku/view')->with('message', 'Buku Berhasil Diubah');
+	}
+	public function delete($id){
+		$buku = Buku::where('id_buku',$id)->first();
+		$buku->delete();
+		return redirect()->to('buku/view')->with('message', 'Buku Berhasil Dihapus');
 	}
 }

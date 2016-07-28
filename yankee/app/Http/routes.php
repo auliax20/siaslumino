@@ -47,4 +47,24 @@ Route::get('/kelas/delete/{kode_kelas}', 'Kelascontroller@delete');
 Route::post('/kelas/inputkelas', 'Kelascontroller@add');
 Route::post('/kelas/editkelas/{kode_kelas}', 'Kelascontroller@edit');
 
+Route::get('/buku/view', 'Bukucontroller@index');
+Route::get('/buku', 'Bukucontroller@index');
+Route::get('/buku/add', function () {
+    return view('buku.inputbuku');
+});
+Route::get('/buku/edit/{buku}', 'Bukucontroller@Viewedit');
+Route::get('/buku/delete/{buku}', 'Bukucontroller@delete');
+Route::post('/buku/inputbuku', 'Bukucontroller@add');
+Route::post('/buku/editbuku/{buku}', 'Bukucontroller@edit');
+
+Route::get('/mapel/view', 'Mapelcontroller@index');
+Route::get('/mapel', 'Mapelcontroller@index');
+Route::get('/mapel/add', function () {
+    return view('mapel.inputmapel');
+});
+Route::get('/mapel/edit/{kode}', 'Mapelcontroller@viewedit');
+Route::get('/mapel/delete/{kode}', 'Mapelcontroller@delete');
+Route::post('/mapel/inputmapel', 'Mapelcontroller@add');
+Route::post('/mapel/editmapel/{kode}', 'Mapelcontroller@update');
+
 Route::post('login', 'Logincontroller@Aulogin');
