@@ -14,5 +14,47 @@ use Redirect;
 
 class Bukucontroller extends Controller
 {
-    //
+    public function index(){
+		$buku = Buku::orderBy('id_buku','DESC')->paginate(50);
+		return view('buku.viewbuku')->with('buku',$buku);
+	}
+	public function viewedit($id){
+		$view = Buku::where('id_buku',$id)->first();
+		return view('buku.editbuku')->with('buku', $view);
+	}
+	protected function validatorData($data){
+        return Validator::make($data, array(
+            'kode_buku' => 'required|max:255|unique:buku',
+			'nama_buku' => 'required',
+			'pengarang' => 'required',
+			'penerbit' => 'required',
+			'jumlah' => 'required',
+        ));
+    }
+	public function add(){
+		$buku = new Buku();
+		$buku->kode_buku = Input::get('kode_buku');
+		$buku->nama_buku = Input::get('nama_buku');
+		$buku->pengarang = Input::get('pengarang');
+		$buku->penerbit = Input::get('penerbit');	
+		$buku->jumlah = Input::get('jumlah');
+		$data = array(
+			'kode_buku' => Input::get('kode_kelas'),
+			'nama_buku' => Input::get('nama_kelas'),
+			'pengarang' => Input::get('pengarang'),
+			'penerbit' => Input::get('penerbit'),
+			'jumlah' => Input::get('jumlah'),
+		);
+		$vdata = $this->validatorData($data);
+		if($vdata->passes()){
+			$buku->save();	
+			return redirect()->to()->with('message', 'Buku Berhasil Disimpan');
+		}else{
+			$mes = $vdata->messages();
+			return redirect()->back()->with('error', $mes);	
+		}
+	}
+	public function edit($id){
+		$buku = Buku::where('id_buku',$id)->first();	
+	}
 }
