@@ -15,7 +15,7 @@ use Redirect;
 class Kelascontroller extends Controller
 {
     public function index(){
-		$kelas = Kelas::orderBy('id_kelas','DESC')->paginate(50);
+		$kelas = Kelas::orderBy('id_kelas','DESC')->get();
 		return view('kelas.viewkelas')->with('kelas', $kelas);	
 	}
 	public function Viewedit($id){

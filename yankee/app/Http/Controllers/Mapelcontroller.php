@@ -15,7 +15,7 @@ use Redirect;
 class Mapelcontroller extends Controller
 {
     public function index(){
-		$mapel = Mapel::orderBy('id_mapel','DESC')->paginate(50);
+		$mapel = Mapel::orderBy('id_mapel','DESC')->get();
 		return view('mapel.viewmapel')->with('mapel', $mapel);
 	}
 	public function viewedit($id){

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Guru;
+use App\Mapel;
 use App\Userr;
 use View;
 use Input;
@@ -16,7 +17,7 @@ use Redirect;
 class Gurucontroller extends Controller
 {
 	public function index(){
-    	$data = Guru::orderBy('id_guru','DESC')->paginate(50);
+    	$data = Guru::with('console')->get();
 		return view('guru.viewguru')->with('guru', $data);
 	}
 	protected function validatorData($data)
@@ -25,6 +26,7 @@ class Gurucontroller extends Controller
             'nip' => 'required|max:255|unique:guru',
 			'nama_guru' => 'required',
 			'tanggal_lahir' => 'required',
+			'kode_mapel' => 'required',
 			'jabatan' => 'required',
 			'username' => 'required|max:255|unique:guru',
         ));
@@ -43,6 +45,7 @@ class Gurucontroller extends Controller
 			'nip' => Input::get('nip'),
 			'nama_guru' => Input::get('nama_guru'),
 			'tanggal_lahir' => Input::get('tanggal_lahir'),
+			'kode_mapel' => Input::get('mapel'),
 			'jabatan' => Input::get('jabatan'),
 			'username' => Input::get('username')
 		);
@@ -58,6 +61,7 @@ class Gurucontroller extends Controller
 		$tambah->nama_guru = $request['nama_guru'];
 		$tambah->tanggal_lahir = $request['tanggal_lahir'];
 		$tambah->jabatan = $request['jabatan'];
+		$tambah->kode_mapel = $request['mapel'];
 		$tambah->username = $request['username'];
 		$tambahguru = new Userr();
 		$tambahguru->username = $request['username'];
@@ -76,9 +80,15 @@ class Gurucontroller extends Controller
 			return redirect()->back()->with('error', $mes);	
 		}
 	}
+	public function addform(){
+		$mapel = Mapel::orderBy('id_mapel','DESC')->get();	
+		return view('guru.inputguru')->with('mapel',$mapel);
+	}
 	public function viewedit($id){
 		$viewguru = Guru::where('username',$id)->first();
-		return view('guru.editguru')->with('guru',$viewguru);
+		$vmapel = Mapel::orderBy('nama_mapel','ASC')->get();
+		return view('guru.editguru')->with('guru',$viewguru)->with('mapel',$vmapel);
+		
 			
 	}
 	public function update($id){
@@ -86,6 +96,7 @@ class Gurucontroller extends Controller
 		$update->nip = Input::get('nip');
 		$update->nama_guru = Input::get('nama_guru');
 		$update->tanggal_lahir = Input::get('tanggal_lahir');
+		$update->kode_mapel = Input::get('mapel');
 		$update->jabatan = Input::get('jabatan');
 		$update->update();
 		return redirect()->to('/guru/view');			

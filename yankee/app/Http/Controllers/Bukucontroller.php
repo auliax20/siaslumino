@@ -15,7 +15,7 @@ use Redirect;
 class Bukucontroller extends Controller
 {
     public function index(){
-		$buku = Buku::orderBy('id_buku','DESC')->paginate(50);
+		$buku = Buku::orderBy('id_buku','DESC')->get();
 		return view('buku.viewbuku')->with('buku',$buku);
 	}
 	public function viewedit($id){

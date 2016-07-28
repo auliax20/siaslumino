@@ -34,6 +34,19 @@ Edit Guru
 									<input class="form-control" placeholder="YYYY/mm/dd" name="tanggal_lahir" value="{{ $guru->tanggal_lahir}}">
 								</div>	
                                 <div class="form-group">
+									<label>Mata Pelajaran</label>
+									<select class="form-control" name="mapel">
+                                    <option value=""> -Pilih Mata Pelajaran-</option>
+                                    @foreach($mapel as $data)
+                                    	@if($data->kode_mapel == $guru->kode_mapel)
+                                    	<option value="{{ $data->kode_mapel}}" selected="selected">{{ $data->nama_mapel }}</option>
+                                        @else
+                                        	<option value="{{ $data->kode_mapel}}">{{ $data->nama_mapel }}</option>
+                                        @endif
+                                    @endforeach
+                                    </select>
+								</div>
+                                <div class="form-group">
 									<label>Jabatan</label>
 									<select class="form-control" name="jabatan">
                                     

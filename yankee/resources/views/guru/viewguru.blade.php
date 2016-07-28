@@ -25,6 +25,7 @@ View Guru
 						        <th>NIP</th>
 						        <th>Nama Guru</th>
 						        <th>Tanggal Lahir</th>
+                                <th>Mata Pelajaran</th>
                                 <th>Jabatan</th>
                                 <th>Username</th>
                                 <th>Operation</th>
@@ -34,13 +35,14 @@ View Guru
                             <?php $no=1;?>
                             @foreach($guru as $data)
                             <tr>
-						        <th>{{$no++}}</th>
-						        <th>{{$data->nip}}</th>
-						        <th>{{$data->nama_guru}}</th>
-						        <th>{{$data->tanggal_lahir}}</th>
-                                <th>{{$data->jabatan}}</th>
-                                <th>{{$data->username}}</th>
-                                <th><a href="/guru/edit/{{$data->username}}" class="btn btn-warning">Edit</a> <a href="/guru/delete/{{$data->username}}" class="btn btn-danger">Delete</a></th>
+						        <td>{{$no++}}</td>
+						        <td>{{$data->nip}}</td>
+						        <td>{{$data->nama_guru}}</td>
+						        <td>{{$data->tanggal_lahir}}</td>
+                                <td>{{$data->console->nama_mapel}}</td>
+                                <td>{{$data->jabatan}}</td>
+                                <td>{{$data->username}}</td>
+                                <td><a href="/guru/edit/{{$data->username}}" class="btn btn-warning">Edit</a> <a href="/guru/delete/{{$data->username}}" class="btn btn-danger">Delete</a></td>
 						    </tr>
                             @endforeach
                             </tbody>

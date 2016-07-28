@@ -32,6 +32,15 @@ Input Guru
                                 <div class="form-group">
 									<label>Tanggal Lahir</label>
 									<input class="form-control" placeholder="YYYY/MM/DD" name="tanggal_lahir" id="date">
+								</div>
+                                <div class="form-group">
+									<label>Mata Pelajaran</label>
+									<select class="form-control" name="mapel">
+                                    <option value=""> -Pilih Mata Pelajaran-</option>
+                                    @foreach($mapel as $data)
+                                    	<option value="{{ $data->kode_mapel}}">{{ $data->nama_mapel }}</option>
+                                    @endforeach
+                                    </select>
 								</div>	
                                 <div class="form-group">
 									<label>Jabatan</label>
