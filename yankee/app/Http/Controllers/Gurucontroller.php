@@ -66,7 +66,7 @@ class Gurucontroller extends Controller
 		$tambahguru = new Userr();
 		$tambahguru->username = $request['username'];
 		$tambahguru->namalengkap = $request['nama_guru'];
-		$tambahguru->password = $request['password'];
+		$tambahguru->password = bcrypt($request['password']);
 		$tambahguru->email = $request['email'];
 		$vguru = $this->validatorData($data);
 		$vuguru = $this->validatorUser($vdatauser);

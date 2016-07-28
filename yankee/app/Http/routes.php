@@ -35,6 +35,14 @@ Route::get('/guru/delete/{username}', 'Gurucontroller@delete');
 Route::post('/guru/inputguru', 'Gurucontroller@add');
 Route::post('/guru/editguru/{username}', 'Gurucontroller@update');
 
+Route::get('/ortu/view', 'Ortucontroller@index');
+Route::get('/ortu', 'Ortucontroller@index');
+Route::get('/ortu/add', 'Ortucontroller@formadd');
+Route::get('/ortu/edit/{kode}', 'Ortucontroller@viewedit');
+Route::get('/ortu/delete/{kode}', 'Ortucontroller@delete');
+Route::post('/ortu/inputortu', 'Ortucontroller@add');
+Route::post('/ortu/editortu/{kode}', 'Ortucontroller@edit');
+
 Route::get('/kelas/view', 'Kelascontroller@index');
 Route::get('/kelas', 'Kelascontroller@index');
 Route::get('/kelas/add', function () {
