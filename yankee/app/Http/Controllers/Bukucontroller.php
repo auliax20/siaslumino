@@ -69,4 +69,15 @@ class Bukucontroller extends Controller
 		$buku->delete();
 		return redirect()->to('buku/view')->with('message', 'Buku Berhasil Dihapus');
 	}
+	public function searchAjax(){
+		$term = Input::get('term');
+		$val = Buku::where('kode_buku','like','%'.$term.'%')
+						->orwhere('nama_buku','like','%'.$term.'%')
+						->get();
+		foreach($val as $data){
+			$result[]= $data->kode_buku." - ".$data->nama_buku;
+		}
+		//$resp = Response::json($result);
+		echo json_encode($result);
+	}
 }

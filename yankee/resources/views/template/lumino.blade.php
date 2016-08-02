@@ -9,6 +9,7 @@
 <link href="{{ asset('asset/css/datepicker3.css')}}" rel="stylesheet">
 <link href="{{ asset('asset/css/styles.css')}}" rel="stylesheet">
 <link href="{{ asset('asset/css/bootstrap-table.css')}}" rel="stylesheet">
+<link href="{{ asset('asset/css/jquery-ui.css')}}" rel="stylesheet">
 
 <!--Icons-->
 <script src="{{ asset('asset/js/lumino.glyphs.js')}}"></script>
@@ -60,12 +61,15 @@
 	@yield('content')	
 	
 
-	<script src="{{ asset('asset/js/jquery-1.11.1.min.js')}}"></script>
-	<script src="{{ asset('asset/js/bootstrap.min.js')}}"></script>
-	<script src="{{ asset('asset/js/chart.min.js')}}"></script>
+	<script src="{{ asset('asset/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('asset/js/jquery-ui.min.js') }}"></script>
+	<script src="{{ asset('asset/js/bootstrap.min.js') }}"></script>
+	<!--
+    <script src="{{ asset('asset/js/chart.min.js')}}"></script>
 	<script src="{{ asset('asset/js/chart-data.js')}}"></script>
 	<script src="{{ asset('asset/js/easypiechart.js')}}"></script>
 	<script src="{{ asset('asset/js/easypiechart-data.js')}}"></script>
+    -->
 	<script src="{{ asset('asset/js/bootstrap-datepicker.js')}}"></script>
 	<script>
 		$('#calendar').datepicker({

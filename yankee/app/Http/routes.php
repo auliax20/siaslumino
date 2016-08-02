@@ -24,6 +24,7 @@ Route::get('/siswa/edit/{username}', 'Muridcontroller@Vieweditmurid');
 Route::get('/siswa/view', 'Muridcontroller@Viewmurid');
 Route::get('/siswa', 'Muridcontroller@Viewmurid');
 Route::get('/siswa/delete/{username}', 'Muridcontroller@Deletemurid');
+Route::get('/siswa/searchajax', 'Muridcontroller@searchAjax');
 Route::post('/siswa/inputsiswa', 'Muridcontroller@Tambahdata');
 Route::post('/siswa/editsiswa/{username}', 'Muridcontroller@Editmurid');
 
@@ -60,6 +61,7 @@ Route::get('/buku/add', function () {
 });
 Route::get('/buku/edit/{buku}', 'Bukucontroller@Viewedit');
 Route::get('/buku/delete/{buku}', 'Bukucontroller@delete');
+Route::get('/buku/searchajax', 'Bukucontroller@searchAjax');
 Route::post('/buku/inputbuku', 'Bukucontroller@add');
 Route::post('/buku/editbuku/{buku}', 'Bukucontroller@edit');
 
@@ -81,4 +83,11 @@ Route::get('/walas/delete/{kode}', 'Walascontroller@delete');
 Route::post('/walas/inputwalas', 'Walascontroller@add');
 Route::post('/walas/editwalas/{kode}', 'Walascontroller@edit');
 
+Route::get('/pustaka/pinjaman', function(){
+	return view('pustaka.inputpinjaman');
+});
+Route::get('/pustaka', function(){
+	return view('pustaka.inputpinjaman');
+});
+Route::post('/pustaka/inputpinjaman', 'Walascontroller@edit');
 Route::post('login', 'Logincontroller@Aulogin');

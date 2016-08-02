@@ -11,6 +11,7 @@ use App\Userr;
 use View;
 use Input;
 use DB;
+use Response;
 use Redirect;
 
 class Muridcontroller extends Controller
@@ -90,5 +91,16 @@ class Muridcontroller extends Controller
 		$update->no_hp = Input::get('no_hp');
 		$update->update();
 		return redirect()->to('/siswa/');
+	}
+	public function searchAjax(){
+		$term = Input::get('term');
+		$val = Murid::where('nis','like','%'.$term.'%')
+						->orwhere('nama_murid','like','%'.$term.'%')
+						->get();
+		foreach($val as $data){
+			$result[]= $data->nis." - ".$data->nama_murid;
+		}
+		//$resp = Response::json($result);
+		echo json_encode($result);
 	}
 }
