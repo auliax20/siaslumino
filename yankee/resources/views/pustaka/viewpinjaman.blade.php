@@ -2,7 +2,7 @@
 @extends('template.menulumino')
 @extends('template.contentlumino')
 @section('title')
-View Guru
+View Pinjaman
 @stop
 @section('panel')
 @if (session('error'))
@@ -16,33 +16,37 @@ View Guru
     </div>
 @endif
 			<div class="panel panel-default">
-				<div class="panel-heading">View Guru</div>
+				<div class="panel-heading">View Pinjaman</div>
 					<div class="panel-body">
 					<table class="table batle-striped">
 						    <thead>
 						    <tr>
 						        <th>NO</th>
-						        <th>NIP</th>
-						        <th>Nama Guru</th>
-						        <th>Tanggal Lahir</th>
-                                <th>Mata Pelajaran</th>
-                                <th>Jabatan</th>
-                                <th>Username</th>
+						        <th>NIS</th>
+						        <th>Nama Murid</th>
+						        <th>Kode Buku</th>
+                                <th>Nama Buku</th>
+                                <th>Pengarang</th>
+                                <th>Penerbit</th>
+                                <th>Tanggal Pinjam</th>
+                                <th>Tanggal Batas</th>
                                 <th>Operation</th>
 						    </tr>
 						    </thead>
                             <tbody>
                             <?php $no=1;?>
-                            @foreach($guru as $data)
+                            @foreach($pustaka as $data)
                             <tr>
 						        <td>{{$no++}}</td>
-						        <td>{{$data->nip}}</td>
-						        <td>{{$data->nama_guru}}</td>
-						        <td>{{$data->tanggal_lahir}}</td>
-                                <td>{{$data->console->nama_mapel}}</td>
-                                <td>{{$data->jabatan}}</td>
-                                <td>{{$data->username}}</td>
-                                <td><a href="/guru/edit/{{$data->username}}" class="btn btn-warning">Edit</a> <a href="/guru/delete/{{$data->username}}" class="btn btn-danger">Delete</a></td>
+						        <td>{{$data->nis}}</td>
+						        <td>{{$data->consolemurid->nama_murid}}</td>
+						        <td>{{$data->kode_buku}}</td>
+                                <td>{{$data->consolebuku->nama_buku}}</td>
+                                <td>{{$data->consolebuku->pengarang}}</td>
+                                <td>{{$data->consolebuku->penerbit}}</td>
+                                <td>{{$data->tanggal_pinjam}}</td>
+                                <td>{{$data->tanggal_batas}}</td>
+                                <td><a href="/pustaka/kembali/{{$data->id_pinjam}}" class="btn btn-success">Kembali</a></td>
 						    </tr>
                             @endforeach
                             </tbody>
