@@ -60,18 +60,6 @@ class Pustakacontroller extends Controller
 		$abuku = explode(" ",Input::get('kode_buku'));
 		$buku = $abuku[0];
 		$pustaka = Pustaka::where('kode_buku',$buku)->get();
-<<<<<<< HEAD
 		return redirect()->to('pustaka.viewpustaka')->with('pustaka',$pustaka);		
 	}
-	public function kembaliBuku($idpinjam){
-		$now = date('Y-m-d');
-		$pustaka = Pustaka::where('id_pustaka', $idpinjam)->first();
-		$pustaka->delete();
-		return redirect()->to('pustaka.viewpustaka')->with('message','Buku berhasil dikembalikan');		
-	}
-	
-=======
-		return view('pustaka.viewpinjaman')->with('pustaka',$pustaka);		
-	}	
->>>>>>> df4501d452c5129924dd30226b93b8325cb0a2dc
 }
