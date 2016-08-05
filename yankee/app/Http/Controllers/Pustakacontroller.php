@@ -43,19 +43,24 @@ class Pustakacontroller extends Controller
 	}
 	public function viewPinjaman(){
 		$pustaka = Pustaka::orderBy('tanggal_batas','DESC')->get();
-		return redirect()->to('pustaka.viewpustaka')->with('pustaka',$pustaka);	
+		return view('pustaka.viewpinjaman')->with('pustaka',$pustaka);	
 	}
 	public function viewPinjamanLewat(){
-		$now = date(Y-m-d);
+		$now = date('Y-m-d');
 		$pustaka = Pustaka::where('tanggal_batas','<',$now)->get();
-		return redirect()->to('pustaka.viewpustaka')->with('pustaka',$pustaka);	
+		return view('pustaka.viewpinjaman')->with('pustaka',$pustaka);	
 	}
-	public function viewPinjamanSiswa($nis){
+	public function viewPinjamanSiswa(){
+		$anis = explode(" ",Input::get('nis'));
+		$nis = $anis[0];
 		$pustaka = Pustaka::where('nis',$nis)->get();
-		return redirect()->to('pustaka.viewpustaka')->with('pustaka',$pustaka);	
+		return view('pustaka.viewpinjaman')->with('pustaka',$pustaka);	
 	}
-	public function viewPinjamanBuku($buku){
+	public function viewPinjamanBuku(){
+		$abuku = explode(" ",Input::get('kode_buku'));
+		$buku = $abuku[0];
 		$pustaka = Pustaka::where('kode_buku',$buku)->get();
+<<<<<<< HEAD
 		return redirect()->to('pustaka.viewpustaka')->with('pustaka',$pustaka);		
 	}
 	public function kembaliBuku($idpinjam){
@@ -65,4 +70,8 @@ class Pustakacontroller extends Controller
 		return redirect()->to('pustaka.viewpustaka')->with('message','Buku berhasil dikembalikan');		
 	}
 	
+=======
+		return view('pustaka.viewpinjaman')->with('pustaka',$pustaka);		
+	}	
+>>>>>>> df4501d452c5129924dd30226b93b8325cb0a2dc
 }

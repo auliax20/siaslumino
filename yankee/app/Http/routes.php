@@ -89,5 +89,17 @@ Route::get('/pustaka/pinjaman', function(){
 Route::get('/pustaka', function(){
 	return view('pustaka.inputpinjaman');
 });
-Route::post('/pustaka/inputpinjaman', 'Walascontroller@edit');
+Route::get('/pustaka/filternis', function(){
+	return view('pustaka.filterbynis');
+});
+Route::get('/pustaka/filterbuku', function(){
+	return view('pustaka.filterbybuku');
+});
+Route::get('/pustaka/view/lewathari', 'Pustakacontroller@viewPinjamanLewat');
+Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
+Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
+Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
+Route::post('/pustaka/inputpinjaman', 'Pustakacontroller@add');
+Route::post('/pustaka/filterbynis', 'Pustakacontroller@viewPinjamanSiswa');
+Route::post('/pustaka/filterbybuku', 'Pustakacontroller@viewPinjamanBuku');
 Route::post('login', 'Logincontroller@Aulogin');
