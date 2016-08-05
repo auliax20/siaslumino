@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Buku;
+use Carbon\Carbon;
 use App\Siswa;
+use App\Pustaka;
 use View;
 use Input;
 use DB;
@@ -17,11 +19,24 @@ class Pustakacontroller extends Controller
 {
 	public function add(){
 		$abuku = explode(" ",Input::get('kode_buku'));
+		$anis = explode(" ",Input::get('nis'));
 		$kbuku = $abuku[0];
-		$jbuku = Buku::where('kode_buku',$kbuku)->first();
-		$jpinj = Pustaka::where('kode_buku',$kbuku)->get()->count();
-		if($jpinj < $jbuku){
-			//add query
+		$knis = $anis[0];
+		$lamapinjam = Input::get('top');
+		$jbuku = Buku::where('kode_buku', $kbuku)->first();
+		echo $jbuku->jumlah;
+		$jpinj = Pustaka::where('kode_buku', $kbuku)->get()->count();
+		if($jpinj < $jbuku->jumlah){
+			$now = Carbon::now();
+			$kem = Carbon::now();
+			$kembali = $kem->addDays($lamapinjam);
+			$pustaka = new Pustaka();
+			$pustaka->nis = $knis;
+			$pustaka->kode_buku = $kbuku;
+			$pustaka->tanggal_pinjam = $now->toDateString();
+			$pustaka->tanggal_batas = $kembali->toDateString();
+			$pustaka->save();
+			return redirect()->back()->with('message','Data Pinjaman Berhasil Disimpan');	
 		}else{
 			return redirect()->back()->with('error','Buku Kosong');	
 		}
@@ -44,7 +59,7 @@ class Pustakacontroller extends Controller
 		return redirect()->to('pustaka.viewpustaka')->with('pustaka',$pustaka);		
 	}
 	public function kembaliBuku($idpinjam){
-		$now = date(Y-m-d);
+		$now = date('Y-m-d');
 		$pustaka = Pustaka::where('id_pustaka', $idpinjam)->first();
 		$pustaka->delete();
 		return redirect()->to('pustaka.viewpustaka')->with('message','Buku berhasil dikembalikan');		
