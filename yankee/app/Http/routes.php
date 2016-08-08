@@ -99,6 +99,7 @@ Route::get('/pustaka/view/lewathari', 'Pustakacontroller@viewPinjamanLewat');
 Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
 Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
 Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
+Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
 Route::post('/pustaka/inputpinjaman', 'Pustakacontroller@add');
 Route::post('/pustaka/filterbynis', 'Pustakacontroller@viewPinjamanSiswa');
 Route::post('/pustaka/filterbybuku', 'Pustakacontroller@viewPinjamanBuku');
