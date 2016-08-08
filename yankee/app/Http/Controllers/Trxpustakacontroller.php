@@ -46,11 +46,15 @@ class Trxpustakacontroller extends Controller
 		return view('pustaka.viewtrxpin')->with('trx', $trx);
 	}
 	public function viewDataBynis(){
+		$anis = explode(" ",Input::get('nis'));
+		$nis = $anis[0];
 		$trx = Trxpustaka::where('nis',$nis)->get();
 		return view('pustaka.viewtrxpin')->with('trx', $trx);
 	}
 	public function viewDataBybuku(){
-		$trx = Trxpustaka::where('kode_buku',$nis)->get();
+		$akode = explode(" ",Input::get('kode_buku'));
+		$kode = $akode[0];
+		$trx = Trxpustaka::where('kode_buku',$kode)->get();
 		return view('pustaka.viewtrxpin')->with('trx', $trx);
 	}
 }
