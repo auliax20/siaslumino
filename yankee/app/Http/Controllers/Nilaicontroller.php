@@ -55,40 +55,20 @@ class Nilaicontroller extends Controller
 	}
 	public function filterByKelas(){
 		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
-		$absensi = Nilai::where('kode_kelas',Input::get('kelas'))
+		$nilai = Nilai::where('kode_kelas',Input::get('kelas'))
 					->andwhere('tahun_ajaran', $ta->tahun_ajaran)->get();
-		return view('absensi.viewabsensi')->with('absensi',$absensi);
+		return view('nilai.viewnilai')->with('nilai',$nilai);
 	}
 	public function filterByNis(){
 		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
-		$absensi = Nilai::where('nis',Input::get('nis'))
-					->andwhere('tahun_ajaran', $ta->tahun-ajaran)->get();
-		return view('absensi.viewabsensi')->with('absensi',$absensi);
+		$nilai = Nilai::where('nis',Input::get('nis'))
+					->andwhere('tahun_ajaran', $ta->tahun_ajaran)->get();
+		return view('nilai.viewnilai')->with('nilai',$nilai);
 	}
-	public function filterByStatus(){
+	public function filterByMapel(){
 		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
-		$absensi = Nilai::where('status',Input::get('status'))
-					->andwhere('tahun_ajaran', $ta->tahun-ajaran)->get();
-		return view('absensi.viewabsensi')->with('absensi',$absensi);
-	}
-	public function filterByTanggal(){
-		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
-		$absensi = Nilai::where('tanggal_absen',Input::get('tanggal_absen'))
-					->andwhere('tahun_ajaran', $ta->tahun-ajaran)->get();
-		return view('absensi.viewabsensi')->with('absensi',$absensi);
-	}
-	public function filterByKelasTanggal(){
-		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
-		$absensi = Nilai::where('kode_kelas', Input::get('kelas'))
-					->andwhere('tanggal_absen', Input::get('tanggal_absen'))
-					->andwhere('tahun_ajaran', $ta->tahun-ajaran)->get();
-		return view('absensi.viewabsensi')->with('absensi',$absensi);
-	}
-	public function filterBySiswaTanggal(){
-		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
-		$absensi = Nilai::where('nis', Input::get('nis'))
-					->andwhere('tanggal_absen', Input::get('tanggal_absen'))
-					->andwhere('tahun_ajaran', $ta->tahun-ajaran)->get();
-		return view('absensi.viewabsensi')->with('absensi',$absensi);
+		$nilai = Nilai::where('kode_mapel',Input::get('kode_mapel'))
+					->andwhere('tahun_ajaran', $ta->tahun_ajaran)->get();
+		return view('nilai.viewnilai')->with('nilai',$nilai);
 	}
 }
