@@ -8,7 +8,7 @@ class Absensi extends Model
 {
     protected $table = 'absensi';
 	protected $primaryKey = 'id_absensi';
-	protected $fillable = ['nis', 'nip', 'kode_kelas', 'jam-pelajaran', 'kode_mapel', 'status', 'tanggal_absen'];
+	protected $fillable = ['nis', 'nip', 'kode_kelas', 'jam_pelajaran', 'kode_mapel', 'status', 'tanggal_absen'];
 	public $timestamps = false;
 	public function consolemurid(){
 		return $this->belongsTo('App\Murid','nis','nis');

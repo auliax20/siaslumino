@@ -49,7 +49,8 @@ class Absensicontroller extends Controller
 			$absen->save();
 			return redirect()->back()->with('message', 'Absen Berhasil Disimpan');
 		}else{
-			return redirect()->back()->with('error', 'Absen Gagal Disimpan');	
+			$mes = $vdata->message();
+			return redirect()->back()->with('error', $mes);	
 		}			
 	}
 	public function filterByKelas(){
