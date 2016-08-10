@@ -16,7 +16,7 @@ Input Pinjaman
     </div>
 @endif
 <div class="panel panel-default">
-					<div class="panel-heading">Form Input Pinjaman</div>
+					<div class="panel-heading">Form Input Absensi</div>
 					<div class="panel-body">
 						<div class="col-lg-12">
 							<form role="form" method="POST" action="{{ asset('pustaka/inputpinjaman') }}">
@@ -26,12 +26,29 @@ Input Pinjaman
 									<input class="form-control" placeholder="Ketikkan NIS atau Nama" name="nis" id="nis">
 								</div>
                                 <div class="form-group">
-									<label>Buku</label>
-									<input class="form-control" placeholder="Ketikkan Kode Buku atau Nama Buku" name="kode_buku" id="buku">
+									<label>NIP</label>
+									<input class="form-control" placeholder="Ketikkan NIP atau Nama" name="nip" id="nip">
 								</div>
 								<div class="form-group">
-									<label>Lama Pinjam</label>
-									<input class="form-control" placeholder="Lama Pinjaman Dalam Hari" name="top" id="top">
+									<label>Kelas</label>
+									<input class="form-control" placeholder="Ketikkan Nama Kelas atau Kode Kelas" name="kelas" id="kelas">
+								</div>
+                                <div class="form-group">
+									<label>Jam Pelajaran</label>
+									<select class="form-control" name="jam_pelajaran" id="jam_pelajaran">
+                                    	<option value="1">Jam 1</option>
+                                        <option value="2">Jam 2</option>
+                                        <option value="3">Jam 3</option>
+                                        <option value="4">Jam 4</option>
+                                        <option value="5">Jam 5</option>
+                                        <option value="6">Jam 6</option>
+                                        <option value="7">Jam 7</option>
+                                        <option value="8">Jam 8</option>
+                                    </select>
+								</div>
+                                <div class="form-group">
+									<label>Mata Pelajaran</label>
+									<input class="form-control" name="kode_mapel" id="kode_mapel">
 								</div>
                                 <div class="form-group">
 									<button class="btn btn-primary">Submit</button>
@@ -51,8 +68,16 @@ Input Pinjaman
 </script>
 <script>
   $(function() { 
-    $( "#buku" ).autocomplete({
+    $( "#kelas" ).autocomplete({
       source: '{{ asset('buku/searchajax') }}',
+	  minLength: 3
+    });
+  } );
+</script>
+<script>
+  $(function() { 
+    $( "#kode_mapel" ).autocomplete({
+      source: '{{ asset('mapel/searchajax') }}',
 	  minLength: 3
     });
   } );
