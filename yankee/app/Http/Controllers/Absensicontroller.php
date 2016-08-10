@@ -28,19 +28,27 @@ class Absensicontroller extends Controller
     }
     public function add(){
 		$absen = new Absensi();
-		$absen->nis = Input::get('nis');
-		$absen->nip = Input::get('nip');
-		$absen->kode_kelas = Input::get('kode_kelas');
+		$anis = explode(" ",Input::get('nis'));
+		$anip = explode(" ",Input::get('nip'));
+		$akodek = explode(" ",Input::get('kode_kelas'));
+		$amapel = explode(" ",Input::get('kode_mapel'));
+		$knis =$anis[0];
+		$knip =$anip[0];
+		$kkodek =$akodek[0];
+		$kmapel =$amapel[0];
+		$absen->nis = $knis;
+		$absen->nip = $knip;
+		$absen->kode_kelas = $kkodek;
 		$absen->jam_pelajaran = Input::get('jam_pelajaran');
-		$absen->kode_mapel = Input::get('kode_mapel');
+		$absen->kode_mapel = $kmapel;
 		$absen->status = Input::get('status');
 		$absen->tanggal_absen = Input::get('tanggal_absen');
 		$data = array(
-			'nis' => Input::get('nis'),
-			'nip' => Input::get('nip'),
-			'kode_kelas' => Input::get('kode_kelas'),
+			'nis' => $knis,
+			'nip' => $knip,
+			'kode_kelas' => $kkodek,
 			'jam_pelajaran' => Input::get('jam_pelajaran'),
-			'kode_mapel' => Input::get('kode_mapel'),
+			'kode_mapel' => $kmapel,
 			'status' => Input::get('status'),
 			'tanggal_absen' => Input::get('tanggal_absen'),
 		);
@@ -49,7 +57,7 @@ class Absensicontroller extends Controller
 			$absen->save();
 			return redirect()->back()->with('message', 'Absen Berhasil Disimpan');
 		}else{
-			$mes = $vdata->message();
+			$mes = $vdata->messages();
 			return redirect()->back()->with('error', $mes);	
 		}			
 	}

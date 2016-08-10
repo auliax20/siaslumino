@@ -104,8 +104,11 @@ Route::post('/pustaka/inputpinjaman', 'Pustakacontroller@add');
 Route::post('/pustaka/filterbynis', 'Pustakacontroller@viewPinjamanSiswa');
 Route::post('/pustaka/filterbybuku', 'Pustakacontroller@viewPinjamanBuku');
 
+Route::get('/absensi', function(){
+	return view('absensi.inputabsensi');
+});
 Route::get('/absensi/add', function(){
 	return view('absensi.inputabsensi');
 });
-
+Route::post('/absensi/inputabsensi', 'Absensicontroller@add');
 Route::post('login', 'Logincontroller@Aulogin');

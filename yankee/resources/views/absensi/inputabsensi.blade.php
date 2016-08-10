@@ -2,7 +2,7 @@
 @extends('template.menulumino')
 @extends('template.contentlumino')
 @section('title')
-Input Pinjaman
+Input Absensi
 @stop
 @section('panel')
 @if (session('error'))
@@ -19,7 +19,7 @@ Input Pinjaman
 					<div class="panel-heading">Form Input Absensi</div>
 					<div class="panel-body">
 						<div class="col-lg-12">
-							<form role="form" method="POST" action="{{ asset('pustaka/inputpinjaman') }}">
+							<form role="form" method="POST" action="{{ asset('absensi/inputabsensi') }}">
                             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="form-group">
 									<label>NIS</label>
@@ -31,7 +31,7 @@ Input Pinjaman
 								</div>
 								<div class="form-group">
 									<label>Kelas</label>
-									<input class="form-control" placeholder="Ketikkan Nama Kelas atau Kode Kelas" name="kelas" id="kelas">
+									<input class="form-control" placeholder="Ketikkan Nama Kelas atau Kode Kelas" name="kode_kelas" id="kelas">
 								</div>
                                 <div class="form-group">
 									<label>Jam Pelajaran</label>
