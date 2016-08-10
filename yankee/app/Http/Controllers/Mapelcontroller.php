@@ -57,4 +57,15 @@ class Mapelcontroller extends Controller
 		$mapel->delete();
 		return redirect()->to('/mapel/view')->with('message','Mata Pelajaran Berhasil Dihapus');
 	}
+	public function searchAjax(){
+		$term = Input::get('term');
+		$val = Mapel::where('kode_mapel','like','%'.$term.'%')
+						->orwhere('nama_mapel','like','%'.$term.'%')
+						->get();
+		foreach($val as $data){
+			$result[]= $data->kode_mapel." - ".$data->nama_mapel;
+		}
+		//$resp = Response::json($result);
+		echo json_encode($result);
+	}
 }

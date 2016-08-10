@@ -51,6 +51,21 @@ Input Pinjaman
 									<input class="form-control" name="kode_mapel" id="kode_mapel">
 								</div>
                                 <div class="form-group">
+									<label>Status</label>
+									<select class="form-control" name="status" id="status">
+                                    	<option value=""> - Pilih Status - </option>
+                                    	<option value="hadir">Hadir</option>
+                                    	<option value="sakit">Sakit</option>
+                                        <option value="izin">Izin</option>
+                                        <option value="cabut">Cabut</option>
+                                        <option value="alfa">Alfa</option>
+                                    </select>
+								</div>
+                                <div class="form-group">
+									<label>Tanggal Absen</label>
+									<input class="form-control" name="tanggal_absen" id="tgl">
+								</div>
+                                <div class="form-group">
 									<button class="btn btn-primary">Submit</button>
 								</div>				
 						</form>
@@ -68,8 +83,16 @@ Input Pinjaman
 </script>
 <script>
   $(function() { 
+    $( "#nip" ).autocomplete({
+      source: '{{ asset('guru/searchajax') }}',
+	  minLength: 3
+    });
+  } );
+</script>
+<script>
+  $(function() { 
     $( "#kelas" ).autocomplete({
-      source: '{{ asset('buku/searchajax') }}',
+      source: '{{ asset('kelas/searchajax') }}',
 	  minLength: 3
     });
   } );
@@ -81,5 +104,18 @@ Input Pinjaman
 	  minLength: 3
     });
   } );
+</script>
+<script>
+    				$(document).ready(function(){
+      				var date_input=$('input[id="tgl"]'); //our date input has the name "date"
+      				var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      				var options={
+        				format: 'yyyy/mm/dd',
+        				container: container,
+        				todayHighlight: true,
+        				autoclose: true,
+      				};
+      				date_input.datepicker(options);
+    				})
 </script>
 @stop

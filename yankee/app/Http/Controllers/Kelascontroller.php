@@ -61,4 +61,15 @@ class Kelascontroller extends Controller
 		$kelas->delete();
 		return redirect()->to('/kelas/view')->with('message','Kelas Berhasil Dihapus');	
 	}
+	public function searchAjax(){
+		$term = Input::get('term');
+		$val = Kelas::where('kode_kelas','like','%'.$term.'%')
+						->orwhere('nama_kelas','like','%'.$term.'%')
+						->get();
+		foreach($val as $data){
+			$result[]= $data->kode_kelas." - ".$data->nama_kelas;
+		}
+		//$resp = Response::json($result);
+		echo json_encode($result);
+	}
 }

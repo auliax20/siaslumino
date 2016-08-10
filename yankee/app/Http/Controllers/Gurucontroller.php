@@ -106,4 +106,15 @@ class Gurucontroller extends Controller
 		$delete->delete();
 		return redirect()->to('/guru/view/');	
 	}
+	public function searchAjax(){
+		$term = Input::get('term');
+		$val = Guru::where('nip','like','%'.$term.'%')
+						->orwhere('nama_guru','like','%'.$term.'%')
+						->get();
+		foreach($val as $data){
+			$result[]= $data->nip." - ".$data->nama_guru;
+		}
+		//$resp = Response::json($result);
+		echo json_encode($result);
+	}
 }

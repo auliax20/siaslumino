@@ -33,6 +33,7 @@ Route::get('/guru', 'Gurucontroller@index');
 Route::get('/guru/add','Gurucontroller@addform');
 Route::get('/guru/edit/{username}', 'Gurucontroller@Viewedit');
 Route::get('/guru/delete/{username}', 'Gurucontroller@delete');
+Route::get('/guru/searchajax', 'Gurucontroller@searchAjax');
 Route::post('/guru/inputguru', 'Gurucontroller@add');
 Route::post('/guru/editguru/{username}', 'Gurucontroller@update');
 
@@ -51,6 +52,7 @@ Route::get('/kelas/add', function () {
 });
 Route::get('/kelas/edit/{kode_kelas}', 'Kelascontroller@Viewedit');
 Route::get('/kelas/delete/{kode_kelas}', 'Kelascontroller@delete');
+Route::get('/kelas/searchajax', 'Kelascontroller@searchAjax');
 Route::post('/kelas/inputkelas', 'Kelascontroller@add');
 Route::post('/kelas/editkelas/{kode_kelas}', 'Kelascontroller@edit');
 
@@ -72,6 +74,7 @@ Route::get('/mapel/add', function () {
 });
 Route::get('/mapel/edit/{kode}', 'Mapelcontroller@viewedit');
 Route::get('/mapel/delete/{kode}', 'Mapelcontroller@delete');
+Route::get('/mapel/searchajax', 'Mapelcontroller@searchAjax');
 Route::post('/mapel/inputmapel', 'Mapelcontroller@add');
 Route::post('/mapel/editmapel/{kode}', 'Mapelcontroller@update');
 
@@ -97,10 +100,12 @@ Route::get('/pustaka/filterbuku', function(){
 });
 Route::get('/pustaka/view/lewathari', 'Pustakacontroller@viewPinjamanLewat');
 Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
-Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
-Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
-Route::get('/pustaka/view', 'Pustakacontroller@viewPinjaman');
 Route::post('/pustaka/inputpinjaman', 'Pustakacontroller@add');
 Route::post('/pustaka/filterbynis', 'Pustakacontroller@viewPinjamanSiswa');
 Route::post('/pustaka/filterbybuku', 'Pustakacontroller@viewPinjamanBuku');
+
+Route::get('/absensi/add', function(){
+	return view('absensi.inputabsensi');
+});
+
 Route::post('login', 'Logincontroller@Aulogin');
