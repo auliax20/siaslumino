@@ -61,6 +61,11 @@ class Absensicontroller extends Controller
 			return redirect()->back()->with('error', $mes);	
 		}			
 	}
+	public function view(){
+		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
+		$absensi = Absensi::orderBy('tanggal_absen','DESC')->get();
+		return view('absensi.viewabsensi')->with('absensi',$absensi);
+	}
 	public function filterByKelas(){
 		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
 		$absensi = Absensi::where('kode_kelas',Input::get('kelas'))

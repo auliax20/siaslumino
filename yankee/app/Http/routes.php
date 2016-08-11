@@ -110,5 +110,6 @@ Route::get('/absensi', function(){
 Route::get('/absensi/add', function(){
 	return view('absensi.inputabsensi');
 });
+Route::get('/absensi/view', 'Absensicontroller@view');
 Route::post('/absensi/inputabsensi', 'Absensicontroller@add');
 Route::post('login', 'Logincontroller@Aulogin');
