@@ -2,7 +2,7 @@
 @extends('template.menulumino')
 @extends('template.contentlumino')
 @section('title')
-Input Pinjaman
+Filter By NIS
 @stop
 @section('panel')
 @if (session('error'))
@@ -16,10 +16,10 @@ Input Pinjaman
     </div>
 @endif
 <div class="panel panel-default">
-					<div class="panel-heading">Form Input Pinjaman</div>
+					<div class="panel-heading">Filter By NIS</div>
 					<div class="panel-body">
 						<div class="col-lg-12">
-							<form role="form" method="POST" action="{{ asset('pustaka/filterbynis') }}">
+							<form role="form" method="POST" action="{{ asset('absensi/acfilterbynis') }}">
                             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="form-group">
 									<label>NIS</label>

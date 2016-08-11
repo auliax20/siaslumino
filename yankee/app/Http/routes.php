@@ -111,5 +111,16 @@ Route::get('/absensi/add', function(){
 	return view('absensi.inputabsensi');
 });
 Route::get('/absensi/view', 'Absensicontroller@view');
+Route::get('/absensi/filterbynis', function(){
+	return view('absensi.filterbynis');
+});
+Route::get('/absensi/filterbytanggal', function(){
+	return view('absensi.filterbynistgl');
+});
+Route::get('/absensi/rekap/{kode}', 'Absensicontroller@rekapAbsensi');
+Route::get('/absensi/filterbynistgl', 'Absensicontroller@filterByNisTanggalr');
+Route::post('/absensi/filterbynistgl', 'Absensicontroller@filterByNisTanggal');
+//Route::get('/absensi/filtertanggal', 'Absensicontroller@filterByNisTanggal');
 Route::post('/absensi/inputabsensi', 'Absensicontroller@add');
+Route::post('/absensi/acfilterbynis', 'Absensicontroller@filterByNis');
 Route::post('login', 'Logincontroller@Aulogin');
