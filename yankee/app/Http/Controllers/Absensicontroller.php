@@ -114,13 +114,13 @@ class Absensicontroller extends Controller
 		return view('absensi.viewrekapabsensi')->with('data', $storage);
 	}
 	public function filterByNisTanggalr(){
-		//$nnis = explode(" ", Input::get('nis'));
-		//$anis = $nnis[0];
-		$anis = "123456689";
-		$tgl1 = "2016/08/11";
-		$tgl2 = "2016/08/11";
-		//$tgl1 = Input::get('tgl1');
-		//$tgl2 = Input::get('tgl2');
+		$nnis = explode(" ", Input::get('nis'));
+		$anis = $nnis[0];
+		//$anis = "123456689";
+		//$tgl1 = "2016/08/11";
+		//$tgl2 = "2016/08/11";
+		$tgl1 = Input::get('tanggal1');
+		$tgl2 = Input::get('tanggal2');
 		$absen = DB::select('SELECT DISTINCT(nis) FROM absensi WHERE nis= :kode',['kode'=>$anis]);
 		$zz = array();
 		foreach($absen as $data => $siswa){
@@ -145,9 +145,9 @@ class Absensicontroller extends Controller
 			$zz[] = $siswa;
 		}
 		$storage = (object) $zz;
-		echo("<pre>");
+		/*echo("<pre>");
 		print_r($storage);
-		echo("</pre>");
-		//return view('absensi.viewrekapabsensi')->with('data', $storage);
+		echo("</pre>");*/
+		return view('absensi.viewrekapabsensi')->with('data', $storage);
 	}
 }
