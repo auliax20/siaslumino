@@ -119,7 +119,14 @@ Route::get('/absensi/filterbytanggal', function(){
 });
 Route::get('/absensi/rekap/{kode}', 'Absensicontroller@rekapAbsensi');
 Route::post('/absensi/filterbynistgl', 'Absensicontroller@filterByNisTanggalr');
-//Route::get('/absensi/filtertanggal', 'Absensicontroller@filterByNisTanggal');
 Route::post('/absensi/inputabsensi', 'Absensicontroller@add');
 Route::post('/absensi/acfilterbynis', 'Absensicontroller@filterByNis');
+
+Route::get('/nilai/', function(){
+	return view('nilai.inputnilai');
+});
+Route::get('/nilai/input', function(){
+	return view('nilai.inputnilai');
+});
+Route::post('/nilai/inputnilai','Nilaicontroller@add');
 Route::post('login', 'Logincontroller@Aulogin');

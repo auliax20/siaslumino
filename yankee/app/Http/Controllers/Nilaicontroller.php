@@ -23,41 +23,42 @@ class Nilaicontroller extends Controller
 			'nilai' => 'required',
 			'nip' => 'required',
 			'kode_kelas' => 'required',
-			'tahun_ajaran' => 'required',
         ));
     }
     public function add(){
+		$anis = explode(" ", Input::get('nis'));
+		$nis = $anis[0];
+		$anip = explode(" ", Input::get('nip'));
+		$nip = $anip[0];
 		$data = array(
-			'nis' => Input::get('nis'),
+			'nis' => $nis,
 			'kode_mapel' => Input::get('kode_mapel'),
 			'jenis_nilai' => Input::get('jenis_nilai'),
 			'nilai' => Input::get('nilai'),
-			'nip' => Input::get('nip'),
+			'nip' => $nip,
 			'kode_kelas' => Input::get('kode_kelas'),
-			'tahun_ajaran' => Input::get('tahun_ajaran'),
 		);
 		$nilai = new Nilai();
-		$nilai->nis = Input::get('nis');
+		$nilai->nis = $nis;
 		$nilai->kode_mapel = Input::get('kode_mapel');
 		$nilai->jenis_nilai = Input::get('jenis_nilai');
 		$nilai->nilai = Input::get('nilai');
-		$nilai->nip = Input::get('nip');
+		$nilai->nip = $nip;
 		$nilai->kode_kelas = Input::get('kode_kelas');
-		$nilai->tahun_ajaran = Input::get('tahun_ajaran');
 		$vdata = $this->validatorData($data);
 		if($vdata->passes()){
 			$nilai->save();
 			return redirect()->back()->with('message', 'Nilai Berhasil Disimpan');
 		}else{
-			$mes = $vdata->message();
+			$mes = $vdata->messages();
 			return redirect()->back()->with('error', $mes);
 		}
 	}
 	public function filterByKelas(){
-		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
-		$nilai = Nilai::where('kode_kelas',Input::get('kelas'))
-					->andwhere('tahun_ajaran', $ta->tahun_ajaran)->get();
-		return view('nilai.viewnilai')->with('nilai',$nilai);
+		$tah = Option::orderBy('tahun_ajaran','DESC')->first();
+		$ta = $tah->tahun_ajaran;
+		
+		//return view('nilai.viewnilai')->with('nilai',$nilai);
 	}
 	public function filterByNis(){
 		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
