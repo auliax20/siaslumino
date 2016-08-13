@@ -30,21 +30,27 @@ class Nilaicontroller extends Controller
 		$nis = $anis[0];
 		$anip = explode(" ", Input::get('nip'));
 		$nip = $anip[0];
+		$amp = explode(" ", Input::get('kode_mapel'));
+		$mp = $amp[0];
+		$akk = explode(" ", Input::get('kode_mapel'));
+		$kk = $akk[0];
 		$data = array(
 			'nis' => $nis,
-			'kode_mapel' => Input::get('kode_mapel'),
+			'kode_mapel' => $mp,
 			'jenis_nilai' => Input::get('jenis_nilai'),
 			'nilai' => Input::get('nilai'),
 			'nip' => $nip,
-			'kode_kelas' => Input::get('kode_kelas'),
+			'kode_kelas' => $kk,
 		);
+		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
 		$nilai = new Nilai();
 		$nilai->nis = $nis;
-		$nilai->kode_mapel = Input::get('kode_mapel');
+		$nilai->kode_mapel = $mp;
 		$nilai->jenis_nilai = Input::get('jenis_nilai');
 		$nilai->nilai = Input::get('nilai');
 		$nilai->nip = $nip;
-		$nilai->kode_kelas = Input::get('kode_kelas');
+		$nilai->kode_kelas = $kk;
+		$nilai->tahun_ajaran = $ta->tahun_ajaran;
 		$vdata = $this->validatorData($data);
 		if($vdata->passes()){
 			$nilai->save();
@@ -57,7 +63,10 @@ class Nilaicontroller extends Controller
 	public function filterByKelas(){
 		$tah = Option::orderBy('tahun_ajaran','DESC')->first();
 		$ta = $tah->tahun_ajaran;
-		
+		$mapel = Nilai::distinct()->select('kode_mapel')->groupBy('kode_mapel')->get();
+		echo("<pre>");
+		print_r($mapel);
+		echo("</pre>");
 		//return view('nilai.viewnilai')->with('nilai',$nilai);
 	}
 	public function filterByNis(){

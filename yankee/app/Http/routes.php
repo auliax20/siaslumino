@@ -128,5 +128,6 @@ Route::get('/nilai/', function(){
 Route::get('/nilai/input', function(){
 	return view('nilai.inputnilai');
 });
+Route::get('/nilai/rekap', 'Nilaicontroller@filterByKelas');
 Route::post('/nilai/inputnilai','Nilaicontroller@add');
 Route::post('login', 'Logincontroller@Aulogin');
