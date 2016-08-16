@@ -32,7 +32,7 @@ class Nilaicontroller extends Controller
 		$nip = $anip[0];
 		$amp = explode(" ", Input::get('kode_mapel'));
 		$mp = $amp[0];
-		$akk = explode(" ", Input::get('kode_mapel'));
+		$akk = explode(" ", Input::get('kode_kelas'));
 		$kk = $akk[0];
 		$data = array(
 			'nis' => $nis,
@@ -63,11 +63,8 @@ class Nilaicontroller extends Controller
 	public function filterByKelas(){
 		$tah = Option::orderBy('tahun_ajaran','DESC')->first();
 		$ta = $tah->tahun_ajaran;
-		$mapel = Nilai::distinct()->select('kode_mapel')->groupBy('kode_mapel')->get();
-		echo("<pre>");
-		print_r($mapel);
-		echo("</pre>");
-		//return view('nilai.viewnilai')->with('nilai',$nilai);
+		$mapel = Nilai::distinct()->select('kode_mapel')->groupBy('kode_mapel')->with('Consolemapel')->get();
+		return view('nilai.viewrekapkelas')->with('mapel',$mapel);
 	}
 	public function filterByNis(){
 		$ta = Option::orderBy('tahun_ajaran','DESC')->first();
