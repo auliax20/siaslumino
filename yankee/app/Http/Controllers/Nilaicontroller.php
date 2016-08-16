@@ -32,7 +32,7 @@ class Nilaicontroller extends Controller
 		$nip = $anip[0];
 		$amp = explode(" ", Input::get('kode_mapel'));
 		$mp = $amp[0];
-		$akk = explode(" ", Input::get('kode_mapel'));
+		$akk = explode(" ", Input::get('kode_kelas'));
 		$kk = $akk[0];
 		$data = array(
 			'nis' => $nis,
@@ -63,11 +63,88 @@ class Nilaicontroller extends Controller
 	public function filterByKelas(){
 		$tah = Option::orderBy('tahun_ajaran','DESC')->first();
 		$ta = $tah->tahun_ajaran;
-		$mapel = Nilai::distinct()->select('kode_mapel')->groupBy('kode_mapel')->get();
-		echo("<pre>");
-		print_r($mapel);
-		echo("</pre>");
-		//return view('nilai.viewnilai')->with('nilai',$nilai);
+		$siswa = Nilai::distinct()->select('nis')->with('consolemurid')->get();
+		$mapel = Nilai::distinct()->select('kode_mapel')->with('consolemapel')->get();
+		$day = (object) array();
+		foreach($siswa as $sis){
+			foreach($mapel as $map){
+				
+				$uh1 = Nilai::where('jenis_nilai', 'uh1')
+								->where('kode_mapel',$map->kode_mapel)
+								->where('tahun_ajaran', $ta)
+								->where('nis', $sis->nis)->first();
+				$day->{$map->kode_mapel} = (object) array();
+				$day->{$map->kode_mapel}->uh1 = $uh1->nilai;
+				$uh2 = Nilai::where('jenis_nilai', 'uh2')
+								->where('kode_mapel',$map->kode_mapel)
+								->where('tahun_ajaran', $ta)
+								->where('nis', $sis->nis)->first();
+				if(!is_object($day->{$map->kode_mapel})){
+					$day->{$map->kode_mapel} = (object) array();	
+				}
+				if(isset($uh2->nilai)){
+					$day->{$map->kode_mapel}->uh2 = $uh2->nilai;
+				}else{
+					$day->{$map->kode_mapel}->uh2 = 0;	
+				}
+				$mid = Nilai::where('jenis_nilai', 'mid')
+								->where('kode_mapel',$map->kode_mapel)
+								->where('tahun_ajaran', $ta)
+								->where('nis', $sis->nis)->first();
+				if(!is_object($day->{$map->kode_mapel})){
+					$day->{$map->kode_mapel} = (object) array();	
+				}
+				if(isset($mid->nilai)){
+					$day->{$map->kode_mapel}->mid = $mid->nilai;
+				}else{
+					$day->{$map->kode_mapel}->mid = 0;	
+				}
+				$uh3 = Nilai::where('jenis_nilai', 'uh3')
+								->where('kode_mapel',$map->kode_mapel)
+								->where('tahun_ajaran', $ta)
+								->where('nis', $sis->nis)->first();
+				if(!is_object($day->{$map->kode_mapel})){
+					$day->{$map->kode_mapel} = (object) array();	
+				}
+				if(isset($uh3->nilai)){
+					$day->{$map->kode_mapel}->uh3 = $uh3->nilai;
+				}else{
+					$day->{$map->kode_mapel}->uh3 = 0;	
+				}
+				$uh4 = Nilai::where('jenis_nilai', 'uh4')
+								->where('kode_mapel',$map->kode_mapel)
+								->where('tahun_ajaran', $ta)
+								->where('nis', $sis->nis)->first();
+				if(!is_object($day->{$map->kode_mapel})){
+					$day->{$map->kode_mapel} = (object) array();	
+				}
+				if(isset($uh4->nilai)){
+					$day->{$map->kode_mapel}->uh4 = $uh4->nilai;
+				}else{
+					$day->{$map->kode_mapel}->uh4 = 0;	
+				}
+				$rapor = Nilai::where('jenis_nilai', 'rapor')
+								->where('kode_mapel',$map->kode_mapel)
+								->where('tahun_ajaran', $ta)
+								->where('nis', $sis->nis)->first();
+				if(!is_object($day->{$map->kode_mapel})){
+					$day->{$map->kode_mapel} = (object) array();	
+				}
+				if(isset($rapor->nilai)){
+					$day->{$map->kode_mapel}->rapor = $rapor->nilai;
+				}else{
+					$day->{$map->kode_mapel}->rapor = 0;	
+				}
+			}	
+		}
+		//foreach($mapel as $mp){
+			//$day->{$mp->kode_mapel} = $mp->consolemapel->nama_mapel; 	
+		//	$nilaiuh1 = Nilai::select('SELECT uh1 FROM nilai WHERE ');
+		//}
+		//echo("<pre>");
+		//	print_r($day);
+		//echo("<pre>");
+		return view('nilai.viewrekapnilai')->with('mapel',$mapel)->with('siswa',$siswa)->with('rekap',$day);
 	}
 	public function filterByNis(){
 		$ta = Option::orderBy('tahun_ajaran','DESC')->first();

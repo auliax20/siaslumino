@@ -1,0 +1,13 @@
+<?php $no=1;?>
+                            @foreach($data as $data)
+                            <tr>
+						        <td>{{$no++}}</td>
+						        <td>{{$data->nis}}</td>
+						        <td>{{$data->nama}}</td>
+                                <td>{{$data->hadir}}</td>
+                                <td>{{$data->sakit}}</td>
+                                <td>{{$data->izin}}</td>
+                                <td>{{$data->alfa}}</td>
+                                <td>{{$data->cabut}}</td>
+						    </tr>
+                            @endforeach
