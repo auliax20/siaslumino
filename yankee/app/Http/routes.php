@@ -63,7 +63,24 @@ Route::group(['middleware'=>['web','auth']],  function (){
             Route::get('/kelas/searchajax', 'Kelascontroller@searchAjax');
             Route::post('/kelas/inputkelas', 'Kelascontroller@add');
             Route::post('/kelas/editkelas/{kode_kelas}', 'Kelascontroller@edit');
-
+			
+			Route::get('/lokal/add', function () {
+                return view('lokal.inputlokal');
+            });
+			Route::get('/lokal/filterbynis', function () {
+                return view('lokal.bynis');
+            });
+			Route::get('/lokal/filterbykelas', function () {
+                return view('lokal.bykelas');
+            });
+			Route::get('/lokal/view', 'Lokalcontroller@index');
+			Route::get('/lokal/', 'Lokalcontroller@index');
+			Route::get('/lokal/edit/{id}', 'Lokalcontroller@viewedit');
+			Route::get('/lokal/delete/{id}', 'Lokalcontroller@delete');
+			Route::post('/lokal/acedit/{id}', 'Lokalcontroller@edit');
+			Route::post('/lokal/acfilterbynis', 'Lokalcontroller@byNis');
+			Route::post('/lokal/acfilterbylokal', 'Lokalcontroller@byKelas');
+			Route::post('/lokal/inputlokal', 'Lokalcontroller@add');
             Route::get('/buku/view', 'Bukucontroller@index');
             Route::get('/buku', 'Bukucontroller@index');
             Route::get('/buku/add', function () {
