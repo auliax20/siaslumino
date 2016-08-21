@@ -47,7 +47,7 @@ Input Bahan Ajar
 								</div>
                                 <div class="form-group">
 									<label>File bahan</label>
-									<input class="form-control" placeholder="Jumlah" name="jumlah" type="file">
+									<input class="form-control" placeholder="" name="filebahan" type="file">
 								</div>	
 								<div class="form-group">
 									<button class="btn btn-primary">Submit</button>
@@ -55,4 +55,30 @@ Input Bahan Ajar
 						</form>
 					</div>
 				</div>
+@stop
+@section('jsadd')
+<script>
+  $(function() { 
+    $( "#nip" ).autocomplete({
+      source: '{{ asset('guru/searchajax') }}',
+	  minLength: 3
+    });
+  } );
+</script>
+<script>
+  $(function() { 
+    $( "#kelas" ).autocomplete({
+      source: '{{ asset('kelas/searchajax') }}',
+	  minLength: 3
+    });
+  } );
+</script>
+<script>
+  $(function() { 
+    $( "#kode_mapel" ).autocomplete({
+      source: '{{ asset('mapel/searchajax') }}',
+	  minLength: 3
+    });
+  } );
+</script>
 @stop

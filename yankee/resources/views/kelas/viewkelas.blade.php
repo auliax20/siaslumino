@@ -5,9 +5,9 @@
 View Kelas
 @stop
 @section('panel')
-@if (session('error'))
+@if (session('errors'))
     <div class="alert bg-danger">
-        {{ session('error') }}
+        {{ session('errors') }}
     </div>
 @endif
 @if (session('message'))
@@ -15,6 +15,7 @@ View Kelas
         {{ session('message') }}
     </div>
 @endif
+
 			<div class="panel panel-default">
 				<div class="panel-heading">View Kelas</div>
 					<div class="panel-body">

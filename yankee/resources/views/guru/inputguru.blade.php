@@ -5,12 +5,12 @@
 Input Guru
 @stop
 @section('panel')
-@if (session('error'))
+@if(session('error'))
     <div class="alert bg-danger">
         {{ session('error') }}
     </div>
 @endif
-@if (session('message'))
+@if(session('message'))
     <div class="alert bg-primary">
         {{ session('message') }}
     </div>

@@ -5,12 +5,12 @@
 Input Kelas
 @stop
 @section('panel')
-@if (session('error'))
+@if(session('errors'))
     <div class="alert bg-danger">
-        {{ session('error') }}
+        {{ session('errors') }}
     </div>
 @endif
-@if (session('message'))
+@if(session('message'))
     <div class="alert bg-primary">
         {{ session('message') }}
     </div>

@@ -11,10 +11,10 @@
 |
 */
 
-Route::group(['middleware'=>'web'],function(){
+Route::group(array('middleware'=>'web'),function(){
     Route::auth();
 });
-Route::group(['middleware'=>['web','auth']],  function (){
+Route::group(array('middleware'=>array('auth')),  function (){
     Route::get('home', function () {
         return view('home');
     });
@@ -22,7 +22,7 @@ Route::group(['middleware'=>['web','auth']],  function (){
         if(Auth::user()->level=='admin'){
             return view('home');
         }else{
-            echo("Bukan Admin");
+            return view('home');
         }
     });
     Route::get('/siswa/add', function () {
@@ -155,6 +155,11 @@ Route::group(['middleware'=>['web','auth']],  function (){
             });
             Route::get('/nilai/rekap', 'Nilaicontroller@filterByKelas');
             Route::post('/nilai/inputnilai','Nilaicontroller@add');
+			
+			Route::get('/bahanajar/add', function(){
+            	return view('bahanajar.inputbahan');
+            });
+			Route::post('/bahanajar/inputbahanajar', 'Bahanajarcontroller@add');
 });
 Route::post('login', 'Logincontroller@Aulogin');
 Route::get('logout', 'Logincontroller@getLogout');

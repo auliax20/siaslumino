@@ -13,9 +13,6 @@ class Bahanajar extends Model
 	public function consoleguru(){
 		return $this->belongsTo('App\Guru','nip','nip');
 	}
-	public function consoleguru(){
-		return $this->belongsTo('App\Guru','nip','nip');
-	}
 	public function consolekelas(){
 		return $this->belongsTo('App\Kelas','kode_kelas','kode_kelas');
 	}

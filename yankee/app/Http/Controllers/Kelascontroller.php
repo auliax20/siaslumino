@@ -22,12 +22,12 @@ class Kelascontroller extends Controller
 		$vkelas = Kelas::where('id_kelas', $id)->first();
 		return view('kelas.editkelas')->with('kelas', $vkelas);	
 	}
-	protected function validatorData($data){
+	protected function validatorData($data,$message){
         return Validator::make($data, array(
             'kode_kelas' => 'required|max:255|unique:kelas',
 			'nama_kelas' => 'required',
 			'kapasitas' => 'required',
-        ));
+        ),$message);
     }
 	public function add(){
 		$kelas = new Kelas();
@@ -39,14 +39,20 @@ class Kelascontroller extends Controller
 			'nama_kelas' => Input::get('nama_kelas'),
 			'kapasitas' => Input::get('kapasitas'),
 		);
-		$vdata = $this->validatorData($data);
+		$message = array(
+			'unique' => ':attribute tidak boleh sama',
+			'required' => ':attribute harus di isi'
+		);
+		$vdata = $this->validatorData($data,$message);
 		if($vdata->passes()){
 			$kelas->save();		
+			return redirect()->to('/kelas/view')->with('message','Kelas Berhasil Ditambahkan');	
 		}else{
-			$mes = $mes.$vdata->messages();
-			return redirect()->back()->with('error', $mes);	
+			$mes = $vdata->messages();
+			//echo $mes;
+			return redirect()->back()->with('errors', $mes);	
 		}
-		return redirect()->to('/kelas/view')->with('message','Kelas Berhasil Ditambahkan');	
+		
 	}
 	public function edit($id){
 		$kelas = Kelas::where('id_kelas',$id)->first();
