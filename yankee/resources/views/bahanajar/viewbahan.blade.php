@@ -2,7 +2,7 @@
 @extends('template.menulumino')
 @extends('template.contentlumino')
 @section('title')
-View Buku
+View Bahan Ajar
 @stop
 @section('panel')
 @if (session('error'))
@@ -16,31 +16,33 @@ View Buku
     </div>
 @endif
 			<div class="panel panel-default">
-				<div class="panel-heading">View Buku</div>
+				<div class="panel-heading">View Bahan Ajar</div>
 					<div class="panel-body">
 					<table class="table table-striped table-bordered">
 						    <thead>
 						    <tr>
 						        <th>NO</th>
-						        <th>Kode Buku</th>
-						        <th>Nama Buku</th>
-                                <th>Pengarang</th>
-                                <th>Penerbit</th>
-						        <th>Jumlah</th>
+						        <th>Nama Bahan Ajar</th>
+						        <th>Guru</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Kelas</th>
+						        <th>Type</th>
+                                                        <th>File</th>
                                 <th>Operation</th>
 						    </tr>
 						    </thead>
                             <tbody>
                             <?php $no=1;?>
-                            @foreach($buku as $data)
+                            @foreach($bahan as $data)
                             <tr>
 						        <td>{{$no++}}</td>
-						        <td>{{$data->kode_buku}}</td>
-						        <td>{{$data->nama_buku}}</td>
-                                <td>{{$data->pengarang}}</td>
-                                <td>{{$data->penerbit}}</td>
-						        <td>{{$data->jumlah}}</td>
-                                <td><a href="/buku/edit/{{$data->id_buku}}" class="btn btn-warning">Edit</a> <a href="/buku/delete/{{$data->id_buku}}" class="btn btn-danger">Delete</a></td>
+						        <td>{{$data->nama_bahan}}</td>
+						        <td>{{$data->nip}} - {{$data->consoleguru->nama_guru}}</td>
+                                <td>{{$data->consolemapel->nama_mapel}}</td>
+                                <td>{{$data->consolekelas->nama_kelas}}</td>
+						        <td>{{$data->type}}</td>
+                                                        <td>{{$data->file}}</td>
+                                <td><a href="/bahanajar/edit/{{$data->id_bahan}}" class="btn btn-warning">Edit</a> <a href="/buku/delete/{{$data->id_bahan}}" class="btn btn-danger">Delete</a></td>
 						    </tr>
                             @endforeach
                             </tbody>

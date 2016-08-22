@@ -2,7 +2,7 @@
 @extends('template.menulumino')
 @extends('template.contentlumino')
 @section('title')
-Edit Kelas
+Input Bahan Ajar
 @stop
 @section('panel')
 @if (session('error'))
@@ -16,30 +16,38 @@ Edit Kelas
     </div>
 @endif
 <div class="panel panel-default">
-					<div class="panel-heading">Form Edit Kelas</div>
+					<div class="panel-heading">Form Input Bahan Ajar</div>
 					<div class="panel-body">
 						<div class="col-lg-12">
-							<form role="form" method="POST" action="{{ asset('buku/editbuku/'.$buku->id_buku) }}">
+							<form role="form" method="POST" action="{{ asset('bahanajar/inputbahanajar') }}" enctype="multipart/form-data">
                             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="form-group">
-									<label>Kode Buku</label>
-									<input class="form-control" placeholder="Kode Buku" name="kode_buku" value="{{ $buku->kode_buku }}">
+									<label>Nama Bahan Ajar</label>
+                                                                        <input class="form-control" placeholder="Nama Bahan Ajar" name="nama_bahan" value="{{ $bahan->nama_bahan }}">
 								</div>
 								<div class="form-group">
-									<label>Nama Buku</label>
-									<input class="form-control" placeholder="Nama Buku" name="nama_buku" value="{{ $buku->nama_buku }}">
-								</div>
-                                 <div class="form-group">
-									<label>Pengarang</label>
-									<input class="form-control" placeholder="Pengarang" name="pengarang" value="{{ $buku->pengarang }}">
+									<label>NIP</label>
+                                                                        <input class="form-control" placeholder="Ketikkan NIP / Nama Guru" name="nip" id="nip" value="">
 								</div>
                                 <div class="form-group">
-									<label>Penerbit</label>
-									<input class="form-control" placeholder="Penerbit" name="penerbit" value="{{ $buku->penerbit }}">
+									<label>Kelas</label>
+									<input class="form-control" placeholder="Ketikkan Nama Kelas / Kode kelas" name="kode_kelas" id="kelas">
 								</div>
                                 <div class="form-group">
-									<label>Jumlah</label>
-									<input class="form-control" placeholder="Jumlah" name="jumlah" value="{{ $buku->jumlah}}">
+									<label>Mata pelarajan</label>
+									<input class="form-control" placeholder="Ketikkan Mata Pelajaran / Kode Mata Pelajaran" name="kode_mapel" id="kode_mapel">
+								</div>
+                                <div class="form-group">
+									<label>Type</label>
+									<select class="form-control" name="type">
+                                    	<option value=""> - Pilih Type Bahan Ajar - </option>
+                                        <option value="text">Text</option>
+                                        <option value="video">Video</option>
+                                    </select>
+								</div>
+                                <div class="form-group">
+									<label>File bahan</label>
+									<input class="form-control" placeholder="" name="filebahan" type="file">
 								</div>	
 								<div class="form-group">
 									<button class="btn btn-primary">Submit</button>
@@ -47,4 +55,30 @@ Edit Kelas
 						</form>
 					</div>
 				</div>
+@stop
+@section('jsadd')
+<script>
+  $(function() { 
+    $( "#nip" ).autocomplete({
+      source: '{{ asset('guru/searchajax') }}',
+	  minLength: 3
+    });
+  } );
+</script>
+<script>
+  $(function() { 
+    $( "#kelas" ).autocomplete({
+      source: '{{ asset('kelas/searchajax') }}',
+	  minLength: 3
+    });
+  } );
+</script>
+<script>
+  $(function() { 
+    $( "#kode_mapel" ).autocomplete({
+      source: '{{ asset('mapel/searchajax') }}',
+	  minLength: 3
+    });
+  } );
+</script>
 @stop

@@ -156,10 +156,12 @@ Route::group(array('middleware'=>array('auth')),  function (){
             Route::get('/nilai/rekap', 'Nilaicontroller@filterByKelas');
             Route::post('/nilai/inputnilai','Nilaicontroller@add');
 			
-			Route::get('/bahanajar/add', function(){
+            Route::get('/bahanajar/add', function(){
             	return view('bahanajar.inputbahan');
             });
-			Route::post('/bahanajar/inputbahanajar', 'Bahanajarcontroller@add');
+            Route::get('/bahanajar/view', 'Bahanajarcontroller@index');
+            Route::get('/bahanajar', 'Bahanajarcontroller@index');
+            Route::post('/bahanajar/inputbahanajar', 'Bahanajarcontroller@add');
 });
 Route::post('login', 'Logincontroller@Aulogin');
 Route::get('logout', 'Logincontroller@getLogout');
