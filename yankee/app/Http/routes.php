@@ -161,7 +161,9 @@ Route::group(array('middleware'=>array('auth')),  function (){
             });
             Route::get('/bahanajar/view', 'Bahanajarcontroller@index');
             Route::get('/bahanajar', 'Bahanajarcontroller@index');
+			Route::get('/bahanajar/edit/{id}', 'Bahanajarcontroller@viewedit');
             Route::post('/bahanajar/inputbahanajar', 'Bahanajarcontroller@add');
+			Route::post('/bahanajar/editbahanajar/{id}', 'Bahanajarcontroller@edit');
 });
 Route::post('login', 'Logincontroller@Aulogin');
 Route::get('logout', 'Logincontroller@getLogout');

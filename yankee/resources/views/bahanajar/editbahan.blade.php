@@ -19,7 +19,7 @@ Input Bahan Ajar
 					<div class="panel-heading">Form Input Bahan Ajar</div>
 					<div class="panel-body">
 						<div class="col-lg-12">
-							<form role="form" method="POST" action="{{ asset('bahanajar/inputbahanajar') }}" enctype="multipart/form-data">
+							<form role="form" method="POST" action="{{ asset('bahanajar/editbahanajar/'.$bahan->id_bahan) }} " enctype="multipart/form-data">
                             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="form-group">
 									<label>Nama Bahan Ajar</label>
@@ -31,11 +31,11 @@ Input Bahan Ajar
 								</div>
                                 <div class="form-group">
 									<label>Kelas</label>
-									<input class="form-control" placeholder="Ketikkan Nama Kelas / Kode kelas" name="kode_kelas" id="kelas" value="{{ $bahan->kode_kelas }} - {{ $bahan->consolekelas->nama_kelas }}>
+									<input class="form-control" placeholder="Ketikkan Nama Kelas / Kode kelas" name="kode_kelas" id="kelas" value="{{ $bahan->kode_kelas }} - {{ $bahan->consolekelas->nama_kelas }}">
 								</div>
                                 <div class="form-group">
 									<label>Mata pelarajan</label>
-									<input class="form-control" placeholder="Ketikkan Mata Pelajaran / Kode Mata Pelajaran" name="kode_mapel" id="kode_mapel" value="{{ $bahan->kode_mapel }} - {{ $bahan->consolemapel->nama_mapel }}>
+									<input class="form-control" placeholder="Ketikkan Mata Pelajaran / Kode Mata Pelajaran" name="kode_mapel" id="kode_mapel" value="{{ $bahan->kode_mapel }} - {{ $bahan->consolemapel->nama_mapel }}">
 								</div>
                                 <div class="form-group">
 									<label>Type</label>

@@ -79,7 +79,7 @@ class Bahanajarcontroller extends Controller
                 return redirect()->back()->with('error',$mes);
             }
 	}
-        public function edit($id){
+        public function edit(Request $request, $id){
             $anip = explode(" ", Input::get('nip'));
             $nip = $anip[0];
             $akode = explode(" ", Input::get('kode_mapel'));
@@ -87,30 +87,69 @@ class Bahanajarcontroller extends Controller
             $akodek = explode(" ", Input::get('kode_kelas'));
             $kodekelas = $akodek[0];
             $file = $request->file('filebahan');
-            $name = $file->getClientOriginalName();
-            $name1 = $file->getClientOriginalExtension();
             $bahan = Bahanajar::where('id_bahan',$id)->first();
             $bahan->nama_bahan = Input::get('nama_bahan');
             $bahan->nip = $nip;
             $bahan->kode_mapel = $kode;
             $bahan->type = Input::get('type');
             $bahan->kode_kelas = $kodekelas;
-            $bahan->file = $name;
-            $data = array('nama_bahan' => 'required',
-            	'nip' => $nip,
-            	'kode_mapel' => $kode,
-            	'type' => $request->type,
-            	'kode_kelas' => $kodekelas,
-            	'dokumen' => $name1
-            );
+			if($file!=NULL){
+            	$name = $file->getClientOriginalName();
+            	$name1 = $file->getClientOriginalExtension();
+				$bahan->file = $name;
+            	$data = array('nama_bahan' => 'required',
+            		'nip' => $nip,
+            		'kode_mapel' => $kode,
+            		'type' => $request->type,
+            		'kode_kelas' => $kodekelas,
+            		'dokumen' => $name1
+            	);
+			}else{
+            	$data = array('nama_bahan' => 'required',
+            		'nip' => $nip,
+            		'kode_mapel' => $kode,
+            		'type' => $request->type,
+            		'kode_kelas' => $kodekelas
+            	);	
+			}
             $vdata = $this->validatorDataE($data);
             if($vdata->passes()){
                 $bahan->update();
-            	$request->file('filebahan')->move("uploads/",$name);
-                return redirect()->to('bahanajar/view')->with('message','Bahan Ajar Berhasil Dirubah');
+				if($file!=NULL){
+            		$request->file('filebahan')->move("uploads/",$name);
+                	return redirect()->to('bahanajar/view')->with('message','Bahan Ajar Berhasil Dirubah');
+				}else{
+					return redirect()->to('bahanajar/view')->with('message','Bahan Ajar Berhasil Dirubah');	
+				}
             }else{
             	$mes = $vdata->messages();
                 return redirect()->back()->with('error',$mes);
             }
         }
+		public function delete($id){
+			$bahan = Bahanajar::where('id_bahan', $id)->first();
+			$bahan->delete();
+			return redirect()->to('bahanajar/view')->with('message','Bahan Ajar Berhasil Dihapus');
+		}
+		public function filterByKelas(){
+			$akode = explode(" ", Input::get('kode_kelas'));
+			$kode = $akode[0];
+			$bahan = Bahanajar::where('kode_kelas', $kode)->get();	
+			return view('bahanajar.viewbahan')->with('bahan', $bahan);
+		}
+		public function filterByMapel(){
+			$akode = explode(" ", Input::get('kode_mapel'));
+			$kode = $akode[0];
+			$bahan = Bahanajar::where('kode_mapel', $kode)->get();	
+			return view('bahanajar.viewbahan')->with('bahan', $bahan);	
+		}
+		public function filterByMapelKelas(){
+			$akode = explode(" ", Input::get('kode_mapel'));
+			$kode = $akode[0];
+			$akodek = explode(" ", Input::get('kode_kelas'));
+			$kodek = $akode[0];
+			$bahan = Bahanajar::where('kode_mapel', $kode)->
+								where('kode_kelas', $kodek)->get();	
+			return view('bahanajar.viewbahan')->with('bahan', $bahan);	
+		}
 }
