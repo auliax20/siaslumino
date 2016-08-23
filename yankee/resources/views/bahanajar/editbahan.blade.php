@@ -27,22 +27,31 @@ Input Bahan Ajar
 								</div>
 								<div class="form-group">
 									<label>NIP</label>
-                                                                        <input class="form-control" placeholder="Ketikkan NIP / Nama Guru" name="nip" id="nip" value="">
+                                                                        <input class="form-control" placeholder="Ketikkan NIP / Nama Guru" name="nip" id="nip" value="{{ $bahan->nip }} - {{ $bahan->consoleguru->nama_guru }}">
 								</div>
                                 <div class="form-group">
 									<label>Kelas</label>
-									<input class="form-control" placeholder="Ketikkan Nama Kelas / Kode kelas" name="kode_kelas" id="kelas">
+									<input class="form-control" placeholder="Ketikkan Nama Kelas / Kode kelas" name="kode_kelas" id="kelas" value="{{ $bahan->kode_kelas }} - {{ $bahan->consolekelas->nama_kelas }}>
 								</div>
                                 <div class="form-group">
 									<label>Mata pelarajan</label>
-									<input class="form-control" placeholder="Ketikkan Mata Pelajaran / Kode Mata Pelajaran" name="kode_mapel" id="kode_mapel">
+									<input class="form-control" placeholder="Ketikkan Mata Pelajaran / Kode Mata Pelajaran" name="kode_mapel" id="kode_mapel" value="{{ $bahan->kode_mapel }} - {{ $bahan->consolemapel->nama_mapel }}>
 								</div>
                                 <div class="form-group">
 									<label>Type</label>
 									<select class="form-control" name="type">
                                     	<option value=""> - Pilih Type Bahan Ajar - </option>
+                                        @if($bahan->type=='text')
+                                        <option value="text" selected="selected">Text</option>
+                                        @else
                                         <option value="text">Text</option>
-                                        <option value="video">Video</option>
+                                        @endif
+                                        @if($bahan->type=='video')
+                                            <option value="video" selected="selected">Video</option>
+                                        @else
+                                            <option value="video">Video</option>
+                                        @endif
+                                        
                                     </select>
 								</div>
                                 <div class="form-group">
