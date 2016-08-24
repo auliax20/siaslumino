@@ -93,7 +93,8 @@ class Bahanajarcontroller extends Controller
             $bahan->kode_mapel = $kode;
             $bahan->type = Input::get('type');
             $bahan->kode_kelas = $kodekelas;
-			if($file!=NULL){
+            $filelama = $bahan->file;
+            if($file!=NULL){
             	$name = $file->getClientOriginalName();
             	$name1 = $file->getClientOriginalExtension();
 				$bahan->file = $name;
@@ -115,12 +116,13 @@ class Bahanajarcontroller extends Controller
             $vdata = $this->validatorDataE($data);
             if($vdata->passes()){
                 $bahan->update();
-				if($file!=NULL){
-            		$request->file('filebahan')->move("uploads/",$name);
-                	return redirect()->to('bahanajar/view')->with('message','Bahan Ajar Berhasil Dirubah');
-				}else{
-					return redirect()->to('bahanajar/view')->with('message','Bahan Ajar Berhasil Dirubah');	
-				}
+		if($file!=NULL){
+                    unlink("uploads/".$filelama);
+                    $request->file('filebahan')->move("uploads/",$name);
+                    return redirect()->to('bahanajar/view')->with('message','Bahan Ajar Berhasil Dirubah');
+                }else{
+                    return redirect()->to('bahanajar/view')->with('message','Bahan Ajar Berhasil Dirubah');	
+		}
             }else{
             	$mes = $vdata->messages();
                 return redirect()->back()->with('error',$mes);
