@@ -11,3 +11,4 @@ class Blogpost extends Model
 	protected $fillable = array('title', 'id_category', 'post', 'featured', 'status');
 	public $timestamps = false;
 }
+?>

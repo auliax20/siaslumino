@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use App\Blogcategory;
+use App\Blogpost;
 use View;
 use Input;
 use DB;

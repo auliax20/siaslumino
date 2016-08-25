@@ -11,3 +11,4 @@ class Blogcomment extends Model
 	protected $fillable = array('id_post', 'comment', 'status');
 	public $timestamps = false;
 }
+?>
