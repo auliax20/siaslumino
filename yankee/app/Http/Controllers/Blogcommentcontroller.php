@@ -20,15 +20,37 @@ class Blogcommentcontroller extends Controller
 		$comment = Blogcomment::orderBy('date_comment', 'DESC')->paginate(25);
 		return view('comment.viewcomment')->with('comment', $comment);
 	}
+	protected function validatorData($data){
+		$message = array('required'=>'Data :attribute harus diisi');
+        return Validator::make($data, array(
+			'id_post'=>'required', 
+			'post'=>'required'
+        ),$message);
+    }
 	public function add(Request $request){
 		$post = Blogpost::where('id_post',$request->id_post)->first();
 		if($post->status=="show"){
-			$comment = new Blogcomment();		
-			$comment->comment = $request->comment;
-			$comment->date_comment = Carbon::now();
+			$data = array(
+				"id_post" => $request->id_post,
+				"comment" => $request->comment				
+			);
+			$vdata = $this->validatorData($data);
+			if($vdata->passes()){
+				$comment = new Blogcomment();
+				$comment->id_post = $request->id_post;		
+				$comment->comment = $request->comment;
+				$comment->date_comment = Carbon::now();	
+				$comment->save();
+			}else{
+				$mes = $vdata->messages();
+				return redirect()->back()->with('error', $mes);	
+			}
 		}else{
 			
 		}	
+	}
+	public function edit(Request $request, $id){
+		$comment = Blogcomment::where('id_comment', $id)->first();
 	}
 }
 ?>
