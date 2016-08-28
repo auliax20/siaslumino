@@ -16,23 +16,26 @@ class Blogcategorycontroller extends Controller
 {
     public function index(){
 		$cat = Blogcategory::orderBy('category', 'DESC')->get();	
-		return view('blogcategory.viewcategory')->with('category', $cat);
+		return view('category.viewcategory')->with('category', $cat);
 	}
 	protected function validatorData($data){
 		$message = array('required'=>'Data :attribute harus diisi');
         return Validator::make($data, array(
 			'category' => 'required',
+                        'status' => 'required',
         ),$message);
     }
 	public function add(Request $request){
 		$cat = new Blogcategory();
 		$cat->category = $request->category;
-		$cat->status = 'disable';
-		$data = array('category'=>$request->category);
+		$cat->status = $request->status;
+		$data = array('category' => $request->category,
+                        'status' => $request->status
+                    );
 		$vdata = $this->validatorData($data);
 		if($vdata->passes()){
 			$cat->save();
-			return redirect()->to('blogcat/view')->with('message','Data berhasil Disimpan');
+			return redirect()->to('blog-manager/category/view')->with('message','Data berhasil Disimpan');
 		}else{
 			$mes = $vdata->messages();
 			return redirect()->back()->with('error',$mes);
@@ -40,17 +43,18 @@ class Blogcategorycontroller extends Controller
 	}
 	public function viewEdit($id){
 		$cat = Blogcategory::where('id_category',$id)->first();
-		return view('blogcat/edit')->with('category', $cat);	
+		return view('category.editcategory')->with('category', $cat);	
 	}
 	public function edit(Request $request, $id){
 		$cat = Blogcategory::where('id_category',$id)->first();
 		$cat->category = $request->category;
-		$cat->edit();
-		return redirect()->to('blogcat/view')->with('message','Data berhasil Dirubah');
+                $cat->status = $request->status;
+		$cat->update();
+		return redirect()->to('blog-manager/category/view')->with('message','Data berhasil Dirubah');
 	}
 	public function delete($id){
 		$cat = Blogcategory::where('id_category',$id)->first();
 		$cat->delete();
-		return redirect()->to('blogcat/view')->with('message','Data berhasil Dihapus');
+		return redirect()->to('blog-manager/category/view')->with('message','Data berhasil Dihapus');
 	}
 }

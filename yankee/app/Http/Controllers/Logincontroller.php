@@ -18,7 +18,7 @@ class Logincontroller extends Controller
 	public function Aulogin(){
 		if(Auth::attempt(['username' => Input::get('username'), 'password' => Input::get('password')])){
 			if(Auth::user()->level == 'admin'){
-                            return redirect('/');
+                            return redirect('/admin');
 			}else{
                             return redirect('/');
 			}	
