@@ -54,6 +54,9 @@ Input Post
 									<label>Kategori</label>
                                                                         <select class="form-control" name="category">
                                                                             <option value=""> - Pilih Kategori - </option>
+                                                                            @foreach($category as $data)
+                                                                            <option value="{{ $data->id_category }}">{{ $data->category }}</option>
+                                                                            @endforeach
                                                                         </select>
 								</div>
                                 <div class="form-group">
