@@ -1,0 +1,93 @@
+/* important style color */
+.color-white {color: #ffffff !important;}
+.color-magenta {color: #ff0097 !important;}
+.color-darken {color: #1d1d1d !important;}
+.color-teal {color: #00aba9 !important;}
+.color-yellow {color: #ffc40d !important;}
+.color-green {color: #00a300 !important;}
+.color-purple {color: #7e3878 !important;}
+.color-blue {color: #2d89ef !important;}
+.color-orange {color: #e3a21a !important;}
+.color-red {color: #ee1111 !important;}
+
+/* important style background */
+.bg-white {background: #ffffff !important;}
+.bg-magenta {background: #ff0097 !important;}
+.bg-darken {background: #1d1d1d !important;}
+.bg-teal {background: #00aba9 !important;}
+.bg-yellow {background: #ffc40d !important;}
+.bg-light-green {background: #99b433 !important;}
+.bg-dark-green {background: #1e7145 !important;}
+.bg-green {background: #00a300 !important;}
+.bg-light-purple {background: #9f00a7 !important;}
+.bg-dark-purple {background: #603cba !important;}
+.bg-purple {background: #7e3878 !important;}
+.bg-light-blue {background: #eff4ff !important;}
+.bg-dark-blue {background: #2b5797 !important;}
+.bg-blue {background: #2d89ef !important;}
+.bg-light-orange {background: #ffcd64 !important;}
+.bg-dark-orange {background: #da532c !important;}
+.bg-orange {background: #e3a21a !important;}
+.bg-light-red {background: #ff4e4e !important;}
+.bg-dark-red {background: #bd0436 !important;}
+.bg-red {background: #ee1111 !important;}
+
+/* style box */
+.box-default {
+	color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+.box-green {
+    color: #fff;
+    background-color: #2fd0b7;
+    border-color: #4be8d0;
+}
+.box-blue {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.box-red {
+	color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.box-orange {
+	color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+.wrapper-default, .wrapper-primary {
+  max-width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .wrapper-default {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .wrapper-default {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .wrapper-default {
+    width: 1170px;
+  }
+}
+.rows {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+ /* style collumn */
+.column-1, .column-2, .column-3, .column-4, .column-5, .column-6, .column-7, .column-8, .column-9, .column-10, .column-11, .column-12 {
+  position: relative;
+  min-height: 2px;
+  padding-right: 10px;
+  padding-left: 10px;
+}

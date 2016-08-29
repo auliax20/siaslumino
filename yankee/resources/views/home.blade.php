@@ -1,4 +1,6 @@
-@extends('template.lumino')
-@extends('template.menulumino')
-@extends('template.contentlumino')
-
+@extends('template.frontend.template')
+@extends('template.frontend.home')
+@extends('template.frontend.header')
+@extends('template.frontend.rightsidebar')
+@extends('template.frontend.bottombar')
+@extends('template.frontend.footer')

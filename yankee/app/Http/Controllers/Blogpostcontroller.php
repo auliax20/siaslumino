@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Blogpost;
+use App\Blogcategory;
 use View;
 use Input;
 use DB;
@@ -26,7 +27,12 @@ class Blogpostcontroller extends Controller
 			'post'=>'required'
         ),$message);
     }
-	public function add(Request $request){
+    public function sadd(){
+        $cat = Blogcategory::orderBy('category', 'DESC')->get();
+        return view('blog.inputpost')->with('category', $cat);
+    }
+
+    public function add(Request $request){
 		$post = new Blogpost();
 		$data = array(
 			'title'=>$request->title, 

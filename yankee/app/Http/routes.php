@@ -10,19 +10,21 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+Route::get('/', function(){
+    return view('home');
+});
 Route::group(array('middleware'=>'web'),function(){
     Route::auth();
 });
 Route::group(array('middleware'=>array('auth')),  function (){
-    Route::get('home', function () {
-        return view('home');
+    Route::get('admin', function () {
+        return view('backend');
     });
-    Route::get('/',  function (){
+    Route::get('/admin',  function (){
         if(Auth::user()->level=='admin'){
-            return view('home');
+            return view('backend');
         }else{
-            return view('home');
+            return view('login');
         }
     });
     Route::get('/siswa/add', function () {
@@ -161,9 +163,20 @@ Route::group(array('middleware'=>array('auth')),  function (){
             });
             Route::get('/bahanajar/view', 'Bahanajarcontroller@index');
             Route::get('/bahanajar', 'Bahanajarcontroller@index');
-			Route::get('/bahanajar/edit/{id}', 'Bahanajarcontroller@viewedit');
+            Route::get('/bahanajar/edit/{id}', 'Bahanajarcontroller@viewedit');
             Route::post('/bahanajar/inputbahanajar', 'Bahanajarcontroller@add');
-			Route::post('/bahanajar/editbahanajar/{id}', 'Bahanajarcontroller@edit');
+            Route::post('/bahanajar/editbahanajar/{id}', 'Bahanajarcontroller@edit');
+            Route::get('/blog-manager/post', 'Blogpostcontroller@sadd');
+            Route::get('/blog-manager/category/add', function(){
+            	return view('category.inputcategory');
+            });
+            Route::get('/blog-manager/category/view', 'Blogcategorycontroller@index');
+            Route::get('/blog-manager/category', 'Blogcategorycontroller@index');
+            Route::get('/blog-manager/category/edit/{id}', 'Blogcategorycontroller@viewEdit');
+            Route::get('/blog-manager/category/delete/{id}', 'Blogcategorycontroller@delete');
+            Route::post('/blog-manager/category/inputcategory', 'Blogcategorycontroller@add');
+            Route::post('/blog-manager/category/editac/{id}', 'Blogcategorycontroller@edit');
+            
 });
 Route::post('login', 'Logincontroller@Aulogin');
 Route::get('logout', 'Logincontroller@getLogout');

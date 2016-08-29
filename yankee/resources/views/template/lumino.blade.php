@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>@yield('title')</title>
-
+@yield('cssextend')
 <link href="{{ asset('asset/css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{ asset('asset/css/datepicker3.css')}}" rel="stylesheet">
 <link href="{{ asset('asset/css/styles.css')}}" rel="stylesheet">
