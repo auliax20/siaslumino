@@ -41,6 +41,7 @@ class Blogcommentcontroller extends Controller
 				$comment->comment = $request->comment;
 				$comment->date_comment = Carbon::now();	
 				$comment->save();
+				return redirect()->back()->with('message', 'Berhasil ditambahkan');	
 			}else{
 				$mes = $vdata->messages();
 				return redirect()->back()->with('error', $mes);	
@@ -51,6 +52,27 @@ class Blogcommentcontroller extends Controller
 	}
 	public function edit(Request $request, $id){
 		$comment = Blogcomment::where('id_comment', $id)->first();
+		$comment->comment = $request->comment;
+		$comment->update();
+		return redirect()->back()->with('message', 'Berhasil dirubah');	
+	}
+	public function viewEdit($id){
+		$comment = Blogcomment::where('id_comment', $id)->first();
+		return view('comment.editcomment')->with('comment', $comment);	
+	}
+	public function delete($id){
+		$comment = Blogcomment::where('id_comment', $id)->first();
+		$comment->delete();
+		return redirect()->back()->with('message', 'Data berhasil dihapus');
+	}
+	public function changeStatus($id){
+		$comment = Blogcomment::where('id_comment', $id)->first();
+		if($comment->status == "not-show"){
+			$comment->status = "show";
+		}else{
+			$comment->status = "not-show";	
+		}
+		return redirect()->back()->with('message', 'Status berhasil dirubah');
 	}
 }
 ?>
