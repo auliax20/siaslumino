@@ -2,7 +2,7 @@
 @extends('template.menulumino')
 @extends('template.contentlumino')
 @section('title')
-View Bahan Ajar
+View Post
 @stop
 @section('panel')
 @if (session('error'))
@@ -16,33 +16,31 @@ View Bahan Ajar
     </div>
 @endif
 			<div class="panel panel-default">
-				<div class="panel-heading">View Bahan Ajar</div>
+				<div class="panel-heading">View Post</div>
 					<div class="panel-body">
 					<table class="table table-striped table-bordered">
 						    <thead>
 						    <tr>
 						        <th>NO</th>
-						        <th>Nama Bahan Ajar</th>
-						        <th>Guru</th>
-                                <th>Mata Pelajaran</th>
-                                <th>Kelas</th>
-						        <th>Type</th>
-                                                        <th>File</th>
+						        <th>Judul</th>
+						        <th>Isi Post</th>
+                                <th>Kategori</th>
+                                <th>User</th>
+						        <th>Status</th>
                                 <th>Operation</th>
 						    </tr>
 						    </thead>
                             <tbody>
                             <?php $no=1;?>
-                            @foreach($bahan as $data)
+                            @foreach($post as $data)
                             <tr>
 						        <td>{{$no++}}</td>
 						        <td>{{$data->nama_bahan}}</td>
-						        <td>{{$data->nip}} - {{$data->consoleguru->nama_guru}}</td>
-                                <td>{{$data->consolemapel->nama_mapel}}</td>
-                                <td>{{$data->consolekelas->nama_kelas}}</td>
-						        <td>{{$data->type}}</td>
-                                                        <td>{{$data->file}}</td>
-                                <td><a href="/bahanajar/edit/{{$data->id_bahan}}" class="btn btn-warning">Edit</a> <a href="/buku/delete/{{$data->id_bahan}}" class="btn btn-danger">Delete</a></td>
+						        <td>{{$data->post}}</td>
+                                <td>{{$data->consolecategory->category}}</td>
+                                <td>{{$data->user}}</td>
+						        <td>{{$data->status}}</td>
+                                <td><a href="/blog-manager/post/edit/{{$data->id_post}}" class="btn btn-warning">Edit</a> <a href="/blog-manager/post/delete/{{$data->id_post}}" class="btn btn-danger">Delete</a></td>
 						    </tr>
                             @endforeach
                             </tbody>

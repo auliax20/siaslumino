@@ -44,7 +44,7 @@ Input Post
 					<div class="panel-heading">Form Input Post</div>
 					<div class="panel-body">
 						<div class="col-lg-12">
-							<form role="form" method="POST" action="{{ asset('bahanajar/inputbahanajar') }}" enctype="multipart/form-data">
+							<form role="form" method="POST" action="{{ asset('blog-manager/post/inputpost') }}" enctype="multipart/form-data">
                             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="form-group">
 									<label>Judul</label>

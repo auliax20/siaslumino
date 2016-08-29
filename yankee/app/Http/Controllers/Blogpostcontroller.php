@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Blogpost;
 use App\Blogcategory;
+use Auth;
 use View;
 use Input;
 use DB;
@@ -18,13 +19,14 @@ class Blogpostcontroller extends Controller
 {
     public function index(){
 		$post = Blogpost::orderBy('date_post', 'DESC')->get();
-		return view('post.viewpost')->with('post', $post);
+		return view('blog.viewpost')->with('post', $post);
 	}
 	protected function validatorData($data){
 		$message = array('required'=>'Data :attribute harus diisi');
         return Validator::make($data, array(
 			'title'=>'required', 
-			'post'=>'required'
+			'post'=>'required',
+			'id_category'=>'required'
         ),$message);
     }
     public function sadd(){
@@ -36,18 +38,20 @@ class Blogpostcontroller extends Controller
 		$post = new Blogpost();
 		$data = array(
 			'title'=>$request->title, 
-			'post'=>$request->post
+			'post'=>$request->post,
+			'id_category'=>$request->category
 		);
 		$vdata = $this->validatorData($data);
 		if($vdata->passes()){
 			$post->title = $request->title;
 			$post->post = $request->post;
-			$post->id_category = $request->id_category;
+			$post->id_category = $request->category;
 			$post->featured = 'not-featured';
 			$post->status = 'show';
+			$post->user = Auth::user()->namalengkap;
 			$post->date_post = Carbon::now();
 			$post->save();
-			return redirect()->to('post/view')->with('message', 'Tulisan Berhasil Disimpan');
+			return redirect()->to('blog-manager/post/view')->with('message', 'Tulisan Berhasil Disimpan');
 		}else{
 			$mes = $vdata->messages();
 			return redirect()->back()->with('error', $mes);	
@@ -55,7 +59,7 @@ class Blogpostcontroller extends Controller
 	}
 	public function viewEdit($id){
 		$post = Blogpost::where('id_post', $id)->first();
-		return view('post.editpost')->with('post', $post);
+		return view('blog.editpost')->with('post', $post);
 	}
 	public function edit(Request $request, $id){
 		$post = Blogpost::where('id_post', $id)->first();

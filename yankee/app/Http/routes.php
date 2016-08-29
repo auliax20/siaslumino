@@ -167,6 +167,8 @@ Route::group(array('middleware'=>array('auth')),  function (){
             Route::post('/bahanajar/inputbahanajar', 'Bahanajarcontroller@add');
             Route::post('/bahanajar/editbahanajar/{id}', 'Bahanajarcontroller@edit');
             Route::get('/blog-manager/post', 'Blogpostcontroller@sadd');
+			Route::post('/blog-manager/post/inputpost', 'Blogpostcontroller@add');
+			Route::post('/blog-manager/post/view', 'Blogpostcontroller@index');
             Route::get('/blog-manager/category/add', function(){
             	return view('category.inputcategory');
             });
