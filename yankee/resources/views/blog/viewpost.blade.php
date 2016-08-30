@@ -35,9 +35,9 @@ View Post
                             @foreach($post as $data)
                             <tr>
 						        <td>{{$no++}}</td>
-						        <td>{{$data->nama_bahan}}</td>
+						        <td>{{$data->title}}</td>
 						        <td>{{$data->post}}</td>
-                                <td>{{$data->consolecategory->category}}</td>
+                                <td>{{$data->consolecat->category}}</td>
                                 <td>{{$data->user}}</td>
 						        <td>{{$data->status}}</td>
                                 <td><a href="/blog-manager/post/edit/{{$data->id_post}}" class="btn btn-warning">Edit</a> <a href="/blog-manager/post/delete/{{$data->id_post}}" class="btn btn-danger">Delete</a></td>

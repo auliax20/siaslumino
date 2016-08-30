@@ -48,7 +48,7 @@ class Blogpostcontroller extends Controller
 			$post->id_category = $request->category;
 			$post->featured = 'not-featured';
 			$post->status = 'show';
-			$post->user = Auth::user()->namalengkap;
+			$post->user = Auth::user()->username;
 			$post->date_post = Carbon::now();
 			$post->save();
 			return redirect()->to('blog-manager/post/view')->with('message', 'Tulisan Berhasil Disimpan');
@@ -59,7 +59,8 @@ class Blogpostcontroller extends Controller
 	}
 	public function viewEdit($id){
 		$post = Blogpost::where('id_post', $id)->first();
-		return view('blog.editpost')->with('post', $post);
+                $cat = Blogcategory::orderBy('category', 'DESC')->get();
+		return view('blog.editpost')->with('post', $post)->with('category', $cat);
 	}
 	public function edit(Request $request, $id){
 		$post = Blogpost::where('id_post', $id)->first();
